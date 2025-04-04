@@ -1,11 +1,9 @@
-import '../styles/App.css'
+import './styles/App.css';
 
 function App() {
 
   return (
-    <>
-      
-    </>
+    <>Hi Aico</>
   )
 }
 
