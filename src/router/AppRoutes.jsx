@@ -1,15 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from "../App";
-import LoginPage from "../pages/LoginPage"; // øπΩ√
+
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Dashboard from "../pages/Dashboard";
 
 export default function AppRoutes() {
     return (
-    <Router>
-        <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<LoginPage />} />
-        {/* ¥Ÿ∏• ∂ÛøÏ∆ÆµÈ */}
-        </Routes>
-    </Router>
+        <Router>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                {/* Îã§Î•∏ ÎùºÏö∞Ìä∏Îì§ */}
+            </Routes>
+        </Router>
     );
 }
