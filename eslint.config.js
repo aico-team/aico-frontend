@@ -1,55 +1,44 @@
 // eslint.config.js
 import { defineConfig } from "eslint/config";
-// ESLint ³»Àå ±ÔÄ¢/ÆÄ¼­
 import js from "@eslint/js";
-// ºê¶ó¿ìÀú ¹× ES2021 Àü¿ª º¯¼ö
 import globals from "globals";
-// React ÇÃ·¯±×ÀÎ
 import pluginReact from "eslint-plugin-react";
-// Prettier ÇÃ·¯±×ÀÎ
 import pluginPrettier from "eslint-plugin-prettier";
-// Prettier Ãæµ¹ ±ÔÄ¢ ÇØÁ¦
 import configPrettier from "eslint-config-prettier";
 
 export default defineConfig([
   {
-    // ¹«½ÃÇÒ Æú´õ(ºôµå °á°ú¹°, ¶óÀÌºê·¯¸® µî)
     ignores: ["**/node_modules/**", "**/dist/**"],
   },
   {
-    // ¸°Æ® ´ë»ó ÆÄÀÏ(È®ÀåÀÚ)
     files: ["**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs"],
     languageOptions: {
-      parser: js.configs.recommended.parser, // ESLint ³»Àå parser
-      ecmaVersion: "latest",
-      sourceType: "module",
+      parser: js.configs.recommended.parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+        requireConfigFile: false, // âœ… Babel ì„¤ì • íŒŒì¼ ì—†ì´ JSX íŒŒì‹± í—ˆìš©
+      },
       globals: {
         ...globals.browser,
         ...globals.es2021,
       },
     },
-    // »ç¿ëÇÒ ÇÃ·¯±×ÀÎ
     plugins: {
       react: pluginReact,
       prettier: pluginPrettier,
     },
-    // º´ÇÕÇÒ ±ÔÄ¢µé(ESLint ±ÇÀå + React ±ÇÀå + Prettier ±ÇÀå)
     rules: {
-      // ÀÚ¹Ù½ºÅ©¸³Æ® ±âº» ±ÇÀå ·ê
       ...js.configs.recommended.rules,
-      // React ±ÇÀå ·ê
       ...pluginReact.configs.recommended.rules,
-      // Prettier ±ÇÀå ·ê(Æ÷¸ÅÆÃ À§¹İÀ» ESLint°¡ Ã¼Å©)
       ...pluginPrettier.configs.recommended.rules,
-      // eslint-config-prettier¿¡¼­ Á¦°øÇÏ´Â "Ãæµ¹ Á¦°Å" ·ê
       ...configPrettier.rules,
 
-      // React PropTypes »ç¿ëÇÏÁö ¾ÊÀ» °æ¿ì
       "react/prop-types": "off",
-
-      // Prettier Æ÷¸ÅÆÃ À§¹İ ½Ã °æ°í(warn) Ã³¸®
       "prettier/prettier": "warn",
     },
   },
 ]);
-
