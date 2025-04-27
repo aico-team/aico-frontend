@@ -55,11 +55,9 @@ const Register = () => {
     }
 
     try {
-      const res = await apiClient.post("/user/signup", {
-        email: input.email,
-      });
+      const res = await apiClient.get(`/user/duplicate?email=${input.email}`);
 
-      if (res.data.exists) {
+      if (res.data === true) {
         setEmailCheckResult("이미 사용 중인 이메일입니다.");
       } else {
         setEmailCheckResult("사용 가능한 이메일입니다.");
