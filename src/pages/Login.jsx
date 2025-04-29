@@ -47,7 +47,8 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <div className="logo"></div>
       <form onSubmit={handleSubmit}>
         <h1>로그인</h1>
         <div>
