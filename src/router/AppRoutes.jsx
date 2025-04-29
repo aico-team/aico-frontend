@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CurriculumList from "../pages/CurriculumList";
 
 import App from "../App";
 import Login from "../pages/Login";
@@ -31,6 +32,7 @@ export default function AppRoutes() {
             <GeneratedCurriculum curriculum={curriculum} topic={topic} />
           }
         />
+        <Route path="/CurriculumList" element={<CurriculumList />} />
         {/* 다른 라우트들 */}
       </Routes>
     </Router>
