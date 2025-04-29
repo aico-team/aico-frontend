@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../lib/apiClient";
+import { useNavigate } from "react-router-dom";
 
 const GeneratedCurriculum = ({ curriculum, topic }) => {
   // if (!curriculum) {
@@ -10,6 +11,7 @@ const GeneratedCurriculum = ({ curriculum, topic }) => {
   const [content, setContent] = useState(""); //사용자가 수정할 수 있는 텍스트
   const [isEditable, setIsEditable] = useState(false);
   const [error, setError] = useState();
+  const navigate = useNavigate();
 
   //사용자가 curriculum 수정시 개행문자 여부 확인
   useEffect(() => {
@@ -51,8 +53,7 @@ const GeneratedCurriculum = ({ curriculum, topic }) => {
       const response = await apiClient.post("/curri/confirm", payload);
       console.log("서버 응답:", response.data);
 
-      // 성공했을 때 라우팅 (아직 페이지를 정하지 않아서 주석처리)
-      //navigate("/다음페이지경로");
+      navigate("/CurriculumList");
     } catch (err) {
       setError("커리큘럼 확인 실패:" + err.message);
       console.log(err);
