@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../lib/apiClient";
 import { useNavigate } from "react-router-dom";
+import useCurriculumStore from "../../stores/curriculumStore";
 
 const GeneratedCurriculum = ({ curriculum, topic }) => {
   // if (!curriculum) {
@@ -52,6 +53,9 @@ const GeneratedCurriculum = ({ curriculum, topic }) => {
 
       const response = await apiClient.post("/curri/confirm", payload);
       console.log("서버 응답:", response.data);
+
+      //전역 스토어에 커리큘럼 저장
+      useCurriculumStore.getState().addCurriculum(response.data);
 
       navigate("/CurriculumList");
     } catch (err) {
