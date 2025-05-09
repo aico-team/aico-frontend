@@ -55,7 +55,7 @@ const Login = () => {
           <div>
             <label htmlFor="email">이메일</label>
           </div>
-          <input
+          <input className="text-field" />
             type="email"
             id="email"
             name="email"
