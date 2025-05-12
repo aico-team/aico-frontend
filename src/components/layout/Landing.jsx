@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+//import "../styles/Landing.css";
+import "../../styles/Layout.css";
 
 const Landing = () => {
   return (
