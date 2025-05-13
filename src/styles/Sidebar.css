@@ -34,6 +34,9 @@
 }
 
 .sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
   color: #333;
   font-size: 16px;
@@ -46,7 +49,7 @@
 }
 
 .sidebar-menu a:hover {
-  color: 6ed3c7;
+  color: #6ed3c7;
 }
 
 .sidebar-subsection {
@@ -69,7 +72,14 @@
 }
 
 .sidebar-bottom a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: #888;
   font-size: 16px;
   text-decoration: none;
+}
+
+.sidebar-bottom a:hover {
+  color: #6ed3c7;
 }
