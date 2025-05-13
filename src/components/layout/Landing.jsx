@@ -1,10 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-//import "../styles/Landing.css";
+import { useNavigate } from "react-router-dom";
+import "../../styles/Landing.css";
 import "../../styles/Layout.css";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="landing-wrapper">
       <Header />
@@ -15,6 +18,12 @@ const Landing = () => {
             <div className="feature-box">설명글 ...</div>
             <div className="feature-slide">이미지</div>
           </div>
+          <button
+            className="registernow-button"
+            onClick={() => navigate("/register")}
+          >
+            Register Now!
+          </button>
         </section>
       </main>
       <Footer />

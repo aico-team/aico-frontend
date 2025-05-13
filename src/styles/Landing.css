@@ -1,0 +1,96 @@
+.landing-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.landing-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.feature-box,
+.feature-slide {
+  width: 320px;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+
+.feature-box {
+  text-align: left;
+}
+
+.feature-slide {
+  text-align: center;
+}
+
+.registernow-button {
+  padding: 10px 28px;
+  gap: 10px;
+  border: 2px solid #6ed3c7;
+  border-radius: 999px;
+  background: transparent;
+  color: #6ed3c7;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  margin-top: 24px;
+}
+
+.registernow-button:hover {
+  background-color: #5fc2b6;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6ed3c7;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons button {
+  background-color: #6ed3c7;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.auth-buttons button:hover {
+  background-color: #5fc2b6;
+}
