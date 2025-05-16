@@ -1,0 +1,40 @@
+.layout-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid #ccc;
+  z-index: 100;
+}
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.layout-main {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 4rem);
+  overflow: hidden;
+}
+
+.layout-content {
+  flex: 1;
+  padding: 1rem 2rem;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  height: 100%;
+  margin-left: 220px;
+  box-sizing: border-box;
+}
+
+.layout-content > *:first-child {
+  margin-top: 0;
+}
