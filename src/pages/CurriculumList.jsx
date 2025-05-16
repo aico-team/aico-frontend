@@ -4,12 +4,16 @@ import "../styles/CurriculumList.css";
 
 const CurriculumList = () => {
   //여러 개의 커리큘럼 객체가 들어있는 배열 curriculum
-  const { curriculums, fetchCurriculumList, deleteCurriculum } =
+  const { curriculums, fetchCurriculumList, deleteCurriculum, isLoading } =
     useCurriculumStore();
 
   useEffect(() => {
     fetchCurriculumList();
   }, []);
+
+  if (isLoading) {
+    return <p className="empty-message">불러오는 중입니다...</p>;
+  }
 
   return (
     <div className="curriculum-list-container">
@@ -23,7 +27,7 @@ const CurriculumList = () => {
               <div className="curriculum-header">
                 <h2 className="curriculum-topic">📘 {curri.topic}</h2>
                 <button
-                  className="delete button"
+                  className="delete-button"
                   onClick={() => {
                     if (window.confirm("정말 삭제하시겠습니까?")) {
                       deleteCurriculum(curri.id);
@@ -34,14 +38,16 @@ const CurriculumList = () => {
                 </button>
               </div>
               <div className="step-list">
-                {Object.entries(curri.curriculumMap).map(([step, detail]) => (
-                  <div
-                    key={step}
-                    className={`step-item ${detail.completed ? "completed" : ""}`}
-                  >
-                    <strong>Step {step}:</strong> {detail.description}
-                  </div>
-                ))}
+                {Object.entries(curri.curriculumMap)
+                  .sort(([a], [b]) => Number(a) - Number(b))
+                  .map(([step, detail]) => (
+                    <div
+                      key={step}
+                      className={`step-item ${detail.completed ? "completed" : ""}`}
+                    >
+                      <strong>Step {step}:</strong> {detail.description}
+                    </div>
+                  ))}
               </div>
             </div>
           ))}

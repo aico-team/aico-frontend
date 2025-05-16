@@ -24,7 +24,8 @@ const dummyCurriculums = [
 ];
 
 const useCurriculumStore = create((set) => ({
-  curriculums: dummyCurriculums,
+  curriculums: [],
+  isLoading: true,
 
   //새 커리큘럼을 기존 목록에 추가
   addCurriculum: (newCurri) =>
@@ -56,16 +57,26 @@ const useCurriculumStore = create((set) => ({
 
   //커리큘럼 목록 불러오기
   fetchCurriculumList: async () => {
+    set({ isLoading: true });
+
     try {
       const response = await apiClient.get("/curri/list");
-      set({ curriculums: response.data });
+      set({ curriculums: response.data, isLoading: false });
     } catch (err) {
+      //[개발용] 백엔드 연결이 안될 때 더미 데이터 사용
+      console.warn("API 연결 실패. 더미 데이터로 대체");
+      set({ curriculums: dummyCurriculums, isLoading: false });
+
+      //[운영용] 추후 배포 / 운영 시에는 아래 코드 활성화 필요
+      /*
       if (err.response?.status === 404) {
         console.warn("커리큘럼 없음:", err.response.data);
         set({ curriculums: [] });
       } else {
         console.error("커리큘럼 목록 조회 실패:", err);
+        set({ curriculums: dummyCurriculums });
       }
+      */
     }
   },
 }));

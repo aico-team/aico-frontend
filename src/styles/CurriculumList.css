@@ -1,8 +1,80 @@
-button {
-                  background: "#6ED3C7",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "4px",
-                  height: "100%",
-                  textAlign: "center",
+/* CurriculumList.css */
+.curriculum-list-container {
+  width: 100%;
+  padding: 2rem 2rem;
+}
+
+.curriculum-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  font-size: 1rem;
+}
+
+.curriculum-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.curriculum-card {
+  background-color: #d8f5f2;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.curriculum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.curriculum-topic {
+  font-size: 1.25rem;
+  color: #333;
+  background-color: white;
+  border-radius: 8px;
+  padding: 2px;
+  margin: 0;
+}
+
+.delete-button {
+  background-color: #6ed3c7;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.delete-button:hover {
+  background-color: #5fc2b6;
+}
+
+.step-list {
+  padding-left: 10px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.step-item {
+  margin-bottom: 6px;
+  color: #111;
+  font-size: 0.95rem;
+}
+
+.step-item.completed {
+  color: gray;
 }
