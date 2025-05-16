@@ -1,8 +1,30 @@
 import { create } from "zustand";
 import apiClient from "../src/lib/apiClient";
 
+const dummyCurriculums = [
+  {
+    id: "dummy-1",
+    topic: "예시 커리큘럼 1",
+    curriculumMap: {
+      1: { description: "커리큘럼 생성해보기", completed: false },
+      2: { description: "커리큘럼 수정 및 저장해보기", completed: false },
+      3: { description: "이 커리큘럼을 지우기", completed: false },
+    },
+  },
+  {
+    id: "dummy-2",
+    topic: "예시 커리큘럼 2",
+    curriculumMap: {
+      1: { description: "챗봇과 대화해보기", completed: false },
+      2: { description: "대시보드로 이동하기", completed: false },
+      3: { description: "어떤 기능이 있는지 더 둘러보기", completed: false },
+      4: { description: "이 커리큘럼을 지우기", completed: false },
+    },
+  },
+];
+
 const useCurriculumStore = create((set) => ({
-  curriculums: [],
+  curriculums: dummyCurriculums,
 
   //새 커리큘럼을 기존 목록에 추가
   addCurriculum: (newCurri) =>
