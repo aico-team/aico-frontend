@@ -79,7 +79,7 @@ const Login = () => {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div>
-          <button type="submit">로그인</button>
+          <button type="submit" className="bright-web">로그인</button>
         </div>
       </form>
     </div>
