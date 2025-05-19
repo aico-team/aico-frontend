@@ -1,0 +1,32 @@
+.auth-header {
+  height: 4rem;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+
+.auth-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6ed3c7;
+}
+
+.auth-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.nickname {
+  font-weight: 500;
+}
