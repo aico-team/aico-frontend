@@ -83,7 +83,7 @@ const useCurriculumStore = create((set) => ({
     }*/
   },
 
-  toggleCompleteStep: (id, step, completed) => {
+  toggleCompleteStep: async (id, step, completed) => {
     set((state) => {
       const updated = state.curriculums.map((curri) => {
         if (curri.id !== id) return curri;
@@ -101,6 +101,19 @@ const useCurriculumStore = create((set) => ({
       });
       return { curriculums: updated };
     });
+
+    try {
+      const response = await apiClient.post("/curri/complete", {
+        id: id,
+        stage: step,
+        completed: completed,
+      });
+
+      const progress = response.data;
+      console.log(`[진척도] ${id} 커리큘럼의 현재 진척도: ${progress}%`);
+    } catch (err) {
+      console.warn("진척도 요청 무시됨");
+    }
   },
 }));
 
