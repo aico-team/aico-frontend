@@ -23,6 +23,11 @@ const dummyCurriculums = [
   },
 ];
 
+const dummyProgressMap = {
+  "dummy-1": 99.0,
+  "dummy-2": 33.3,
+};
+
 const useCurriculumStore = create((set) => ({
   curriculums: [],
   isLoading: true,
@@ -124,8 +129,10 @@ const useCurriculumStore = create((set) => ({
 
   fetchProgress: async (id) => {
     try {
-      const response = await apiClient.get(`/curri/complete/${id}`);
-      const percent = response.data;
+      const percent = dummyProgressMap[id] || 0;
+
+      //const response = await apiClient.get(`/curri/complete/${id}`);
+      //const percent = response.data;
 
       set((state) => ({
         progressMap: {
