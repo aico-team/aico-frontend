@@ -4,8 +4,13 @@ import "../styles/CurriculumList.css";
 
 const CurriculumList = () => {
   //여러 개의 커리큘럼 객체가 들어있는 배열 curriculum
-  const { curriculums, fetchCurriculumList, deleteCurriculum, isLoading } =
-    useCurriculumStore();
+  const {
+    curriculums,
+    fetchCurriculumList,
+    deleteCurriculum,
+    isLoading,
+    toggleCompleteStep,
+  } = useCurriculumStore();
 
   useEffect(() => {
     fetchCurriculumList();
@@ -45,6 +50,13 @@ const CurriculumList = () => {
                       key={step}
                       className={`step-item ${detail.completed ? "completed" : ""}`}
                     >
+                      <input
+                        type="checkbox"
+                        checked={detail.completed}
+                        onChange={() =>
+                          toggleCompleteStep(curri.id, step, !detail.completed)
+                        }
+                      />
                       <strong>Step {step}:</strong> {detail.description}
                     </div>
                   ))}

@@ -52,13 +52,16 @@ const useCurriculumStore = create((set) => ({
     }
   },
 
-  //모든 커리큘럼 삭제
+  //모든 커리큘럼 삭제 - 예비용
   resetCurriculums: () => set({ curriculums: [] }),
 
   //커리큘럼 목록 불러오기
   fetchCurriculumList: async () => {
     set({ isLoading: true });
 
+    set({ curriculums: dummyCurriculums, isLoading: false });
+
+    /*
     try {
       const response = await apiClient.get("/curri/list");
       set({ curriculums: response.data, isLoading: false });
@@ -76,8 +79,28 @@ const useCurriculumStore = create((set) => ({
         console.error("커리큘럼 목록 조회 실패:", err);
         set({ curriculums: dummyCurriculums });
       }
-      */
-    }
+      
+    }*/
+  },
+
+  toggleCompleteStep: (id, step, completed) => {
+    set((state) => {
+      const updated = state.curriculums.map((curri) => {
+        if (curri.id !== id) return curri;
+
+        return {
+          ...curri,
+          curriculumMap: {
+            ...curri.curriculumMap,
+            [step]: {
+              ...curri.curriculumMap[step],
+              completed: completed,
+            },
+          },
+        };
+      });
+      return { curriculums: updated };
+    });
   },
 }));
 
