@@ -26,6 +26,7 @@ const dummyCurriculums = [
 const useCurriculumStore = create((set) => ({
   curriculums: [],
   isLoading: true,
+  progressMap: {}, //진척도
 
   //새 커리큘럼을 기존 목록에 추가
   addCurriculum: (newCurri) =>
@@ -60,6 +61,11 @@ const useCurriculumStore = create((set) => ({
     set({ isLoading: true });
 
     set({ curriculums: dummyCurriculums, isLoading: false });
+
+    //각 커리큘럼에 대한 진척도
+    dummyCurriculums.forEach((curri) => {
+      useCurriculumStore.getState().fetchProgress(curri.id);
+    });
 
     /*
     try {
@@ -113,6 +119,22 @@ const useCurriculumStore = create((set) => ({
       console.log(`[진척도] ${id} 커리큘럼의 현재 진척도: ${progress}%`);
     } catch (err) {
       console.warn("진척도 요청 무시됨");
+    }
+  },
+
+  fetchProgress: async (id) => {
+    try {
+      const response = await apiClient.get(`/curri/complete/${id}`);
+      const percent = response.data;
+
+      set((state) => ({
+        progressMap: {
+          ...state.progressMap,
+          [id]: percent,
+        },
+      }));
+    } catch (err) {
+      console.warn("진척도를 불러오는데 실패했음");
     }
   },
 }));
