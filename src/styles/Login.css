@@ -1,27 +1,31 @@
-/* Logo */
-.logo {
-  position: absolute;
-  width: 361px;
-  height: 174px;
-  left: calc(50% - 361px / 2 + 0.5px);
-  top: calc(50% - 174px / 2 - 378px);
-}
-
 /* Bright Web */
 .bright-web {
   position: absolute;
   height: 70px;
   left: 0%;
   right: 6.48%;
-  top: calc(50% - 70px / 2 + 21px);
+  top: calc(50% - 70px/2 + 21px);
 
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 60px;
   line-height: 70px;
   text-align: center;
   color: #6ED3C7;
+}
+
+
+/* Button */
+.button {
+  position: absolute;
+  width: 478px;
+  height: 64px;
+  left: 481px;
+  top: 443px;
+
+  background: #6ED3C7;
+  border-radius: 32px;
 }
 
 /* Label */
@@ -67,4 +71,16 @@
   font-size: 16px;
   line-height: 24px;
   color: #666666;
+}
+
+/* Button */
+.button {
+  position: absolute;
+  width: 478px;
+  height: 64px;
+  left: 481px;
+  top: 443px;
+
+  background: #6ED3C7;
+  border-radius: 32px;
 }

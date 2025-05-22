@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="logo"></div>
+      <div className="bright-web"></div>
       <form onSubmit={handleSubmit}>
         <h1>로그인</h1>
         <div>
@@ -79,7 +79,7 @@ const Login = () => {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div>
-          <button type="submit" className="bright-web">로그인</button>
+          <button type="submit" className="button">로그인</button>
         </div>
       </form>
     </div>
