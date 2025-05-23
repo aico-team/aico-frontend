@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useCurriculumStore from "../../stores/curriculumStore";
 import ProgressCircle from "../components/common/ProgressCircle";
 import "../styles/CurriculumList.css";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const CurriculumList = () => {
   //여러 개의 커리큘럼 객체가 들어있는 배열 curriculum
@@ -12,6 +13,11 @@ const CurriculumList = () => {
     isLoading,
     toggleCompleteStep,
     progressMap,
+    recommendations,
+    fetchRecommendations,
+    expandedSteps,
+    toggleExpandedStep,
+    loadingSteps,
   } = useCurriculumStore();
 
   useEffect(() => {
@@ -50,28 +56,73 @@ const CurriculumList = () => {
                     삭제
                   </button>
                 </div>
+
                 <div className="step-list">
                   {Object.entries(curri.curriculumMap)
                     .sort(([a], [b]) => Number(a) - Number(b))
-                    .map(([step, detail]) => (
-                      <div
-                        key={step}
-                        className={`step-item ${detail.completed ? "completed" : ""}`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={detail.completed}
-                          onChange={() =>
-                            toggleCompleteStep(
-                              curri.id,
-                              step,
-                              !detail.completed
-                            )
-                          }
-                        />
-                        <strong>Step {step}:</strong> {detail.description}
-                      </div>
-                    ))}
+                    .map(([step, detail]) => {
+                      const key = `${curri.id}-${step}`;
+                      const isExpanded = expandedSteps.has(key);
+                      const isLoading = loadingSteps.has(key);
+                      const recs = recommendations[key] || [];
+
+                      return (
+                        <div key={step}>
+                          <div
+                            className={`step-item ${detail.completed ? "completed" : ""}`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={detail.completed}
+                              onChange={() =>
+                                toggleCompleteStep(
+                                  curri.id,
+                                  step,
+                                  !detail.completed
+                                )
+                              }
+                            />
+                            <strong>Step {step}:</strong> {detail.description}
+                            <button
+                              className="toggle-recommend-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (expandedSteps.has(key)) {
+                                  toggleExpandedStep(key);
+                                } else {
+                                  fetchRecommendations(curri.id, step);
+                                }
+                              }}
+                            >
+                              {isExpanded ? <FiChevronUp /> : <FiChevronDown />}
+                            </button>
+                          </div>
+
+                          {isExpanded && (
+                            <div className="recommendation-list">
+                              {isLoading ? (
+                                <p>자료 불러오는 중...</p>
+                              ) : (
+                                recs.map((item, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="recommendation-item"
+                                  >
+                                    <a
+                                      href={item.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {item.title}
+                                    </a>
+                                  </div>
+                                ))
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             );

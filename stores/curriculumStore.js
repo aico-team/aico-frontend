@@ -23,6 +23,27 @@ const dummyCurriculums = [
   },
 ];
 
+const dummyRecommendations = {
+  "dummy-1-1": [
+    { title: "React 공식 문서", link: "https://reactjs.org" },
+    { title: "Velog - React 정리", link: "https://velog.io/@example/react" },
+    { title: "유튜브 - React 기본기", link: "https://youtube.com/watch?v=xyz" },
+  ],
+  "dummy-1-2": [
+    { title: "Zustand 사용법", link: "https://zustand-demo.pmnd.rs/" },
+    { title: "상태 관리에 대한 이해", link: "https://velog.io/@example/state" },
+    { title: "Toss Tech - Zustand 소개", link: "https://toss.tech/zustand" },
+  ],
+  "dummy-2-1": [
+    { title: "ChatGPT 활용 팁", link: "https://openai.com/chatgpt" },
+    {
+      title: "AI와 함께 공부하는 법",
+      link: "https://blog.example.com/ai-study",
+    },
+    { title: "예제 챗봇 만들기", link: "https://github.com/example/chatbot" },
+  ],
+};
+
 const dummyProgressMap = {
   "dummy-1": 99.0,
   "dummy-2": 33.3,
@@ -34,7 +55,7 @@ const useCurriculumStore = create((set, get) => ({
   progressMap: {}, //진척도
   //추천 자료 관련 상태
   recommendations: {}, //단계별 추천 자료
-  expandedStep: null, //현재 열려 있는 단계
+  expandedSteps: new Set(), //현재 열려 있는 단계
   loadingSteps: new Set(), //로딩 중인 단계 추적
 
   //새 커리큘럼을 기존 목록에 추가
@@ -155,7 +176,14 @@ const useCurriculumStore = create((set, get) => ({
     const key = `${id}-${step}`;
 
     //자료가 로딩중이거나 이미 자료가 존재할때는 불필요한 API 요청을 방지
-    if (loadingSteps.has(key) || recommendations[key]) return;
+    if (loadingSteps.has(key)) return;
+
+    if (recommendations[key]) {
+      set((state) => ({
+        expandedSteps: new Set(state.expandedSteps).add(key),
+      }));
+      return;
+    }
 
     //로딩-set에 key추가
     set((state) => ({
@@ -164,19 +192,21 @@ const useCurriculumStore = create((set, get) => ({
 
     //API 호출 및 결과 저장
     try {
+      const studyData = dummyRecommendations[key] || [];
+      /*
       const response = await apiClient.post("/curri/recommend", {
         id: id,
         stage: step,
       });
 
-      const studyData = response.data;
+      const studyData = response.data; */
 
       set((state) => ({
         recommendations: {
           ...state.recommendations,
           [key]: studyData,
         },
-        expandedStep: key,
+        expandedSteps: new Set(state.expandedSteps).add(key),
       }));
     } catch (err) {
       console.log("추천 자료 불러오기 실패", err);
@@ -191,9 +221,15 @@ const useCurriculumStore = create((set, get) => ({
   },
 
   toggleExpandedStep: (key) => {
-    set((state) => ({
-      expandedStep: state.expandedStep === key ? null : key,
-    }));
+    set((state) => {
+      const newSet = new Set(state.expandedSteps);
+      if (newSet.has(key)) {
+        newSet.delete(key);
+      } else {
+        newSet.add(key);
+      }
+      return { expandedSteps: newSet };
+    });
   },
 }));
 
