@@ -28,10 +28,14 @@ const dummyProgressMap = {
   "dummy-2": 33.3,
 };
 
-const useCurriculumStore = create((set) => ({
+const useCurriculumStore = create((set, get) => ({
   curriculums: [],
   isLoading: true,
   progressMap: {}, //진척도
+  //추천 자료 관련 상태
+  recommendations: {}, //단계별 추천 자료
+  expandedStep: null, //현재 열려 있는 단계
+  loadingSteps: new Set(), //로딩 중인 단계 추적
 
   //새 커리큘럼을 기존 목록에 추가
   addCurriculum: (newCurri) =>
@@ -123,7 +127,7 @@ const useCurriculumStore = create((set) => ({
       const progress = response.data;
       console.log(`[진척도] ${id} 커리큘럼의 현재 진척도: ${progress}%`);
     } catch (err) {
-      console.warn("진척도 요청 무시됨");
+      console.warn("진척도 요청 무시됨" + err);
     }
   },
 
@@ -141,8 +145,55 @@ const useCurriculumStore = create((set) => ({
         },
       }));
     } catch (err) {
-      console.warn("진척도를 불러오는데 실패했음");
+      console.warn("진척도를 불러오는데 실패했음", err);
     }
+  },
+
+  fetchRecommendations: async (id, step) => {
+    const { loadingSteps, recommendations } = get();
+    //key 생성
+    const key = `${id}-${step}`;
+
+    //자료가 로딩중이거나 이미 자료가 존재할때는 불필요한 API 요청을 방지
+    if (loadingSteps.has(key) || recommendations[key]) return;
+
+    //로딩-set에 key추가
+    set((state) => ({
+      loadingSteps: new Set(state.loadingSteps).add(key),
+    }));
+
+    //API 호출 및 결과 저장
+    try {
+      const response = await apiClient.post("/curri/recommend", {
+        id: id,
+        stage: step,
+      });
+
+      const studyData = response.data;
+
+      set((state) => ({
+        recommendations: {
+          ...state.recommendations,
+          [key]: studyData,
+        },
+        expandedStep: key,
+      }));
+    } catch (err) {
+      console.log("추천 자료 불러오기 실패", err);
+    } finally {
+      //API 호출 후 로딩 상태 제거
+      set((state) => {
+        const newSet = new Set(state.loadingSteps);
+        newSet.delete(key);
+        return { loadingSteps: newSet };
+      });
+    }
+  },
+
+  toggleExpandedStep: (key) => {
+    set((state) => ({
+      expandedStep: state.expandedStep === key ? null : key,
+    }));
   },
 }));
 
