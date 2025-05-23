@@ -1,54 +1,6 @@
 import { create } from "zustand";
 import apiClient from "../src/lib/apiClient";
 
-const dummyCurriculums = [
-  {
-    id: "dummy-1",
-    topic: "예시 커리큘럼 1",
-    curriculumMap: {
-      1: { description: "커리큘럼 생성해보기", completed: false },
-      2: { description: "커리큘럼 수정 및 저장해보기", completed: false },
-      3: { description: "이 커리큘럼을 지우기", completed: false },
-    },
-  },
-  {
-    id: "dummy-2",
-    topic: "예시 커리큘럼 2",
-    curriculumMap: {
-      1: { description: "챗봇과 대화해보기", completed: false },
-      2: { description: "대시보드로 이동하기", completed: false },
-      3: { description: "어떤 기능이 있는지 더 둘러보기", completed: false },
-      4: { description: "이 커리큘럼을 지우기", completed: false },
-    },
-  },
-];
-
-const dummyRecommendations = {
-  "dummy-1-1": [
-    { title: "React 공식 문서", link: "https://reactjs.org" },
-    { title: "Velog - React 정리", link: "https://velog.io/@example/react" },
-    { title: "유튜브 - React 기본기", link: "https://youtube.com/watch?v=xyz" },
-  ],
-  "dummy-1-2": [
-    { title: "Zustand 사용법", link: "https://zustand-demo.pmnd.rs/" },
-    { title: "상태 관리에 대한 이해", link: "https://velog.io/@example/state" },
-    { title: "Toss Tech - Zustand 소개", link: "https://toss.tech/zustand" },
-  ],
-  "dummy-2-1": [
-    { title: "ChatGPT 활용 팁", link: "https://openai.com/chatgpt" },
-    {
-      title: "AI와 함께 공부하는 법",
-      link: "https://blog.example.com/ai-study",
-    },
-    { title: "예제 챗봇 만들기", link: "https://github.com/example/chatbot" },
-  ],
-};
-
-const dummyProgressMap = {
-  "dummy-1": 99.0,
-  "dummy-2": 33.3,
-};
-
 const useCurriculumStore = create((set, get) => ({
   curriculums: [],
   isLoading: true,
@@ -90,33 +42,23 @@ const useCurriculumStore = create((set, get) => ({
   fetchCurriculumList: async () => {
     set({ isLoading: true });
 
-    set({ curriculums: dummyCurriculums, isLoading: false });
-
     //각 커리큘럼에 대한 진척도
-    dummyCurriculums.forEach((curri) => {
-      useCurriculumStore.getState().fetchProgress(curri.id);
-    });
-
-    /*
     try {
       const response = await apiClient.get("/curri/list");
       set({ curriculums: response.data, isLoading: false });
-    } catch (err) {
-      //[개발용] 백엔드 연결이 안될 때 더미 데이터 사용
-      console.warn("API 연결 실패. 더미 데이터로 대체");
-      set({ curriculums: dummyCurriculums, isLoading: false });
 
-      //[운영용] 추후 배포 / 운영 시에는 아래 코드 활성화 필요
-      /*
+      response.data.forEach((curri) => {
+        useCurriculumStore.get().fetchProgress(curri.id);
+      });
+    } catch (err) {
+      console.warn("API 연결 실패", err);
       if (err.response?.status === 404) {
-        console.warn("커리큘럼 없음:", err.response.data);
-        set({ curriculums: [] });
+        console.warn("커리큘럼 없음: ", err.response.data);
       } else {
-        console.error("커리큘럼 목록 조회 실패:", err);
-        set({ curriculums: dummyCurriculums });
+        console.error("커리큘럼 목록 조회 실패", err);
       }
-      
-    }*/
+      set({ curriculums: [], isLoading: false });
+    }
   },
 
   toggleCompleteStep: async (id, step, completed) => {
@@ -154,10 +96,8 @@ const useCurriculumStore = create((set, get) => ({
 
   fetchProgress: async (id) => {
     try {
-      const percent = dummyProgressMap[id] || 0;
-
-      //const response = await apiClient.get(`/curri/complete/${id}`);
-      //const percent = response.data;
+      const response = await apiClient.get(`/curri/complete/${id}`);
+      const percent = response.data;
 
       set((state) => ({
         progressMap: {
@@ -176,7 +116,6 @@ const useCurriculumStore = create((set, get) => ({
     const key = `${id}-${step}`;
 
     //자료가 로딩중이거나 이미 자료가 존재할때는 불필요한 API 요청을 방지
-    if (loadingSteps.has(key)) return;
 
     if (recommendations[key]) {
       set((state) => ({
@@ -185,6 +124,8 @@ const useCurriculumStore = create((set, get) => ({
       return;
     }
 
+    if (loadingSteps.has(key)) return;
+
     //로딩-set에 key추가
     set((state) => ({
       loadingSteps: new Set(state.loadingSteps).add(key),
@@ -192,14 +133,12 @@ const useCurriculumStore = create((set, get) => ({
 
     //API 호출 및 결과 저장
     try {
-      const studyData = dummyRecommendations[key] || [];
-      /*
       const response = await apiClient.post("/curri/recommend", {
         id: id,
         stage: step,
       });
 
-      const studyData = response.data; */
+      const studyData = response.data;
 
       set((state) => ({
         recommendations: {

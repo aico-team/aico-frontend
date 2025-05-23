@@ -22,7 +22,7 @@ const CurriculumList = () => {
 
   useEffect(() => {
     fetchCurriculumList();
-  }, []);
+  }, [fetchCurriculumList]);
 
   if (isLoading) {
     return <p className="empty-message">불러오는 중입니다...</p>;
