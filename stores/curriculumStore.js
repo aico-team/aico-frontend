@@ -23,9 +23,15 @@ const dummyCurriculums = [
   },
 ];
 
+const dummyProgressMap = {
+  "dummy-1": 99.0,
+  "dummy-2": 33.3,
+};
+
 const useCurriculumStore = create((set) => ({
   curriculums: [],
   isLoading: true,
+  progressMap: {}, //진척도
 
   //새 커리큘럼을 기존 목록에 추가
   addCurriculum: (newCurri) =>
@@ -52,13 +58,21 @@ const useCurriculumStore = create((set) => ({
     }
   },
 
-  //모든 커리큘럼 삭제
+  //모든 커리큘럼 삭제 - 예비용
   resetCurriculums: () => set({ curriculums: [] }),
 
   //커리큘럼 목록 불러오기
   fetchCurriculumList: async () => {
     set({ isLoading: true });
 
+    set({ curriculums: dummyCurriculums, isLoading: false });
+
+    //각 커리큘럼에 대한 진척도
+    dummyCurriculums.forEach((curri) => {
+      useCurriculumStore.getState().fetchProgress(curri.id);
+    });
+
+    /*
     try {
       const response = await apiClient.get("/curri/list");
       set({ curriculums: response.data, isLoading: false });
@@ -76,7 +90,58 @@ const useCurriculumStore = create((set) => ({
         console.error("커리큘럼 목록 조회 실패:", err);
         set({ curriculums: dummyCurriculums });
       }
-      */
+      
+    }*/
+  },
+
+  toggleCompleteStep: async (id, step, completed) => {
+    set((state) => {
+      const updated = state.curriculums.map((curri) => {
+        if (curri.id !== id) return curri;
+
+        return {
+          ...curri,
+          curriculumMap: {
+            ...curri.curriculumMap,
+            [step]: {
+              ...curri.curriculumMap[step],
+              completed: completed,
+            },
+          },
+        };
+      });
+      return { curriculums: updated };
+    });
+
+    try {
+      const response = await apiClient.post("/curri/complete", {
+        id: id,
+        stage: step,
+        completed: completed,
+      });
+
+      const progress = response.data;
+      console.log(`[진척도] ${id} 커리큘럼의 현재 진척도: ${progress}%`);
+    } catch (err) {
+      console.warn("진척도 요청 무시됨");
+    }
+  },
+
+  fetchProgress: async (id) => {
+    try {
+      const percent = dummyProgressMap[id] || 0;
+
+      //const response = await apiClient.get(`/curri/complete/${id}`);
+      //const percent = response.data;
+
+      set((state) => ({
+        progressMap: {
+          ...state.progressMap,
+          [id]: percent,
+        },
+      }));
+    } catch (err) {
+      console.warn("진척도를 불러오는데 실패했음");
     }
   },
 }));
