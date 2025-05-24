@@ -50,7 +50,7 @@ const Sidebar = () => {
         <div className="sidebar-subsection">상세 페이지</div>
         <ul>
           <li>
-            <Link to="/">
+            <Link to="/Calendar">
               <AiFillSchedule />
               월간 플래너
             </Link>
