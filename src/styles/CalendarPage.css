@@ -1,0 +1,22 @@
+.goal-list {
+  background: #b3e7e2;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.goal-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.goal-card {
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 240px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+}
