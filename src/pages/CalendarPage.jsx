@@ -10,8 +10,7 @@ import "../styles/CalendarPage.css";
 const CalendarPage = () => {
   const [value, setValue] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  const { goals, fetchGoals, toggleCompleteGoal, deleteGoal, editGoal } =
-    useGoalStore();
+  const { goals, fetchGoals, toggleCompleteGoal, deleteGoal } = useGoalStore();
   //캘린더의 일자 선택시 GoalModal에 넘겨주는 상태
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isEdit, setIsEdit] = useState(false);
