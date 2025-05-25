@@ -16,6 +16,11 @@ const CalendarPage = () => {
     fetchGoals();
   }, []);
 
+  const selectedDayStr = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
+  const todayGoals = Array.isArray(goals)
+    ? goals.filter((goal) => goal.deadLine === selectedDayStr)
+    : [];
+
   return (
     <div className="calendar-page">
       <h1>📅 캘린더</h1>
@@ -37,12 +42,32 @@ const CalendarPage = () => {
 
       <div className="modalbtn-wrapper">
         <button onClick={() => setIsOpen(true)}>새 목표 생성</button>
-        {isOpen && (
+        {isOpen && selectedDate && (
           <GoalModal
             isOpen={isOpen}
             selectedDate={format(selectedDate, "yyyy-MM-dd")}
             onClose={() => setIsOpen(false)}
           />
+        )}
+      </div>
+
+      <div className="goal-list">
+        <h3>📝 {selectedDayStr}의 목표</h3>
+        {todayGoals.length === 0 ? (
+          <p>등록된 목표가 없습니다.</p>
+        ) : (
+          <div className="goal-card-container">
+            {todayGoals.map((goal) => (
+              <div className="goal-card" key={goal.goalId}>
+                <h4>{goal.goalName}</h4>
+                <p>
+                  커리큘럼:{" "}
+                  {goal.curriculumId ? `${goal.curriculumId}` : "없음"}
+                </p>
+                <p>상태: {goal.completed ? "✅ 완료" : "💦 진행 중"}</p>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
