@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiClient from "../lib/apiClient";
 import { useNavigate } from "react-router-dom";
+import "../styles/Register.css"; 
 
 const Register = () => {
   const [input, setInput] = useState({
@@ -83,14 +84,15 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="register-container">
+      <div className="logo">Aico</div>
       <form onSubmit={handleSubmit}>
-        <h1>회원가입</h1>
+        {/* <h1>회원가입</h1> 삭제 */}
         <div>
           <div>
             <label htmlFor="nickname">닉네임</label>
           </div>
-          <input
+          <input className="input-nickname"
             type="text"
             id="nickname"
             name="nickname"
@@ -103,7 +105,7 @@ const Register = () => {
           <div>
             <label htmlFor="email">이메일</label>
           </div>
-          <input
+          <input className="input-email"
             type="email"
             id="email"
             name="email"
@@ -111,7 +113,7 @@ const Register = () => {
             onChange={onChange}
             required
           />
-          <button type="button" onClick={handleEmailCheck}>
+          <button type="button" className="confirmButton" onClick={handleEmailCheck}>
             중복 확인
           </button>
 
@@ -129,7 +131,7 @@ const Register = () => {
           <div>
             <label htmlFor="password">비밀번호</label>
           </div>
-          <input
+          <input className="input-password"
             type="password"
             id="password"
             name="password"
@@ -143,7 +145,7 @@ const Register = () => {
           <div>
             <label htmlFor="confirmPassword">비밀번호 확인</label>
           </div>
-          <input
+          <input className="input-confirmPassword"
             type="password"
             id="confirmPassword"
             name="confirmPassword"
@@ -162,7 +164,7 @@ const Register = () => {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div>
-          <button type="submit">가입하기</button>
+          <button type="submit" className="button">가입하기</button>
         </div>
       </form>
     </div>
