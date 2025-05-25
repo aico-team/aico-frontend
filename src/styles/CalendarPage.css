@@ -13,10 +13,66 @@
 }
 
 .goal-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word;
+  position: relative;
+  width: 240px;
+  padding: 1rem;
   background: #f8f9fa;
   border: 1px solid #ccc;
-  padding: 1rem;
   border-radius: 8px;
-  width: 240px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.goal-card h4 {
+  margin-right: 40px; /* 삭제 버튼 공간 확보 */
+  font-size: 16px;
+  font-weight: bold;
+  max-height: 3.2em; /* 줄 높이 1.6em × 2줄 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.todobtn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-top: auto;
+}
+
+.todo-edit-button {
+  margin-left: 8px;
+  background-color: #f87171;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-completed-button {
+  margin-left: 8px;
+  background-color: #6ed3c7;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: gray;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
 }

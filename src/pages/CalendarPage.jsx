@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { format } from "date-fns";
+import { FiTrash2 } from "react-icons/fi";
 import GoalModal from "../components/GoalModal";
 import useGoalStore from "../../stores/goalStore";
 import "../styles/CalendarPage.css";
@@ -9,9 +10,12 @@ import "../styles/CalendarPage.css";
 const CalendarPage = () => {
   const [value, setValue] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  const { goals, fetchGoals } = useGoalStore();
+  const { goals, fetchGoals, toggleCompleteGoal, deleteGoal, editGoal } =
+    useGoalStore();
   //캘린더의 일자 선택시 GoalModal에 넘겨주는 상태
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isEdit, setIsEdit] = useState(false);
+  const [initialGoal, setInitialGoal] = useState(null);
 
   console.log(goals);
 
@@ -63,12 +67,22 @@ const CalendarPage = () => {
       <h1>📅 캘린더</h1>
 
       <div className="modalbtn-wrapper">
-        <button onClick={() => setIsOpen(true)}>새 목표 생성</button>
+        <button
+          onClick={() => {
+            setIsEdit(false);
+            setInitialGoal(true);
+            setIsOpen(true);
+          }}
+        >
+          새 목표 생성
+        </button>
         {isOpen && selectedDate && (
           <GoalModal
             isOpen={isOpen}
             selectedDate={format(selectedDate, "yyyy-MM-dd")}
             onClose={() => setIsOpen(false)}
+            isEdit={isEdit}
+            initialGoal={initialGoal}
           />
         )}
       </div>
@@ -84,12 +98,14 @@ const CalendarPage = () => {
         }}
         onClickDay={(date) => {
           setSelectedDate(date);
+          setIsEdit(false);
+          setInitialGoal(null);
           setIsOpen(true);
         }}
       />
 
       <div className="goal-list">
-        <h3>📝 {selectedDayStr}의 목표</h3>
+        <h3>📝 {selectedDayStr}의 Todo</h3>
         {todayGoals.length === 0 ? (
           <p>등록된 목표가 없습니다.</p>
         ) : (
@@ -97,11 +113,44 @@ const CalendarPage = () => {
             {todayGoals.map((goal) => (
               <div className="goal-card" key={goal.goalId}>
                 <h4>{goal.goalName}</h4>
+
+                <button
+                  className="todo-delete-button"
+                  onClick={() => {
+                    if (window.confirm("정말 해당 Todo를 삭제하시겠습니까?")) {
+                      deleteGoal(goal.goalId);
+                    }
+                  }}
+                >
+                  <FiTrash2 />
+                </button>
                 <p>
                   커리큘럼:{" "}
                   {goal.curriculumId ? `${goal.curriculumId}` : "없음"}
                 </p>
                 <p>상태: {goal.completed ? "✅ 완료" : "💦 진행 중"}</p>
+                <div className="todobtn-wrapper">
+                  <button
+                    className="todo-edit-button"
+                    onClick={() => {
+                      setIsEdit(true);
+                      setInitialGoal(goal);
+                      setIsOpen(true);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button
+                    className="todo-completed-button"
+                    onClick={() => {
+                      if (window.confirm("해당 Todo를 완료하셨습니까?")) {
+                        toggleCompleteGoal(goal.goalId);
+                      }
+                    }}
+                  >
+                    완료
+                  </button>
+                </div>
               </div>
             ))}
           </div>
