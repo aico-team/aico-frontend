@@ -9,6 +9,8 @@ const CalendarPage = () => {
   const [value, setValue] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const { goals, fetchGoals } = useGoalStore();
+  //캘린더의 일자 선택시 GoalModal에 넘겨주는 상태
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     fetchGoals();
@@ -27,6 +29,10 @@ const CalendarPage = () => {
             Array.isArray(goals) && goals.some((goal) => goal.deadLine === day);
           return hasGoal ? <div className="goal-dot" /> : null;
         }}
+        onClickDay={(date) => {
+          setSelectedDate(date);
+          setIsOpen(true);
+        }}
       />
 
       <div className="modalbtn-wrapper">
@@ -34,7 +40,7 @@ const CalendarPage = () => {
         {isOpen && (
           <GoalModal
             isOpen={isOpen}
-            selectedDate={"2025-05-31"}
+            selectedDate={format(selectedDate, "yyyy-MM-dd")}
             onClose={() => setIsOpen(false)}
           />
         )}
