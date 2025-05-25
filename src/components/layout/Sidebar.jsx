@@ -56,7 +56,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/TodoList">
               <FaListCheck />
               to-do 리스트
             </Link>
