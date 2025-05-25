@@ -10,6 +10,8 @@ import GeneratedCurriculum from "../pages/GeneratedCurriculum";
 import Layout from "../components/layout/Layout";
 import Landing from "../components/layout/Landing";
 import QnaPage from "../pages/QnaPage";
+import CalendarPage from "../pages/CalendarPage";
+import TodoList from "../pages/TodoList";
 
 export default function AppRoutes() {
   const [curriculum, setCurriculum] = useState(null);
@@ -38,6 +40,8 @@ export default function AppRoutes() {
           />
           <Route path="/CurriculumList" element={<CurriculumList />} />
           <Route path="/QnaPage" element={<QnaPage />} />
+          <Route path="/Calendar" element={<CalendarPage />} />
+          <Route path="/TodoList" element={<TodoList />} />
         </Route>
       </Routes>
     </Router>
