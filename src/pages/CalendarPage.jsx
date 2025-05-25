@@ -65,16 +65,107 @@ const CalendarPage = () => {
     <div className="calendar-page">
       <h1>📅 캘린더</h1>
 
-      <div className="modalbtn-wrapper">
-        <button
-          onClick={() => {
-            setIsEdit(false);
-            setInitialGoal(true);
-            setIsOpen(true);
-          }}
-        >
-          새 목표 생성
-        </button>
+      <div className="calendar-layout">
+        <div className="calendar-box">
+          <div className="calendar-wrapper">
+            <Calendar
+              onChange={setValue}
+              value={value}
+              locale="en-us"
+              formatShortWeekday={(locale, date) =>
+                ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"][date.getDay()]
+              }
+              formatDay={(locale, date) => date.getDate().toString()}
+              tileClassName={({ date, view }) => {
+                const isOtherMonth = date.getMonth() !== value.getMonth();
+                return isOtherMonth ? "hide-other-month" : "";
+              }}
+              tileContent={({ date }) => {
+                const dayStr = format(date, "yyyy-MM-dd");
+                const goalsForDay = goals.filter(
+                  (goal) => goal.deadLine === dayStr
+                );
+                const hasIncomplete = goalsForDay.some(
+                  (goal) => !goal.completed
+                );
+                const icon =
+                  goalsForDay.length > 0 ? (hasIncomplete ? "💦" : "✅") : null;
+
+                return (
+                  <div className="calendar-status-wrapper">
+                    {icon ? (
+                      <span>{icon}</span>
+                    ) : (
+                      <span style={{ visibility: "hidden" }}>💦</span>
+                    )}
+                  </div>
+                );
+              }}
+              onClickDay={(date) => {
+                setSelectedDate(date);
+                setIsEdit(false);
+                setInitialGoal(null);
+                setIsOpen(true);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="goal-list">
+          <h3>📝 {selectedDayStr}의 Todo</h3>
+          {todayGoals.length === 0 ? (
+            <p>등록된 목표가 없습니다.</p>
+          ) : (
+            <div className="goal-card-container">
+              {todayGoals.map((goal) => (
+                <div className="goal-card" key={goal.goalId}>
+                  <h4>{goal.goalName}</h4>
+
+                  <button
+                    className="todo-delete-button"
+                    onClick={() => {
+                      if (
+                        window.confirm("정말 해당 Todo를 삭제하시겠습니까?")
+                      ) {
+                        deleteGoal(goal.goalId);
+                      }
+                    }}
+                  >
+                    <FiTrash2 />
+                  </button>
+                  <p>
+                    커리큘럼:{" "}
+                    {goal.curriculumId ? `${goal.curriculumId}` : "없음"}
+                  </p>
+                  <p>상태: {goal.completed ? "✅ 완료" : "💦 진행 중"}</p>
+                  <div className="todobtn-wrapper">
+                    <button
+                      className="todo-edit-button"
+                      onClick={() => {
+                        setIsEdit(true);
+                        setInitialGoal(goal);
+                        setIsOpen(true);
+                      }}
+                    >
+                      수정
+                    </button>
+                    <button
+                      className="todo-completed-button"
+                      onClick={() => {
+                        if (window.confirm("해당 Todo를 완료하셨습니까?")) {
+                          toggleCompleteGoal(goal.goalId);
+                        }
+                      }}
+                    >
+                      완료
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {isOpen && selectedDate && (
           <GoalModal
             isOpen={isOpen}
@@ -83,76 +174,6 @@ const CalendarPage = () => {
             isEdit={isEdit}
             initialGoal={initialGoal}
           />
-        )}
-      </div>
-
-      <Calendar
-        onChange={setValue}
-        value={value}
-        tileContent={({ date }) => {
-          const day = format(date, "yyyy-MM-dd");
-          const hasGoal =
-            Array.isArray(goals) && goals.some((goal) => goal.deadLine === day);
-          return hasGoal ? <div className="goal-dot" /> : null;
-        }}
-        onClickDay={(date) => {
-          setSelectedDate(date);
-          setIsEdit(false);
-          setInitialGoal(null);
-          setIsOpen(true);
-        }}
-      />
-
-      <div className="goal-list">
-        <h3>📝 {selectedDayStr}의 Todo</h3>
-        {todayGoals.length === 0 ? (
-          <p>등록된 목표가 없습니다.</p>
-        ) : (
-          <div className="goal-card-container">
-            {todayGoals.map((goal) => (
-              <div className="goal-card" key={goal.goalId}>
-                <h4>{goal.goalName}</h4>
-
-                <button
-                  className="todo-delete-button"
-                  onClick={() => {
-                    if (window.confirm("정말 해당 Todo를 삭제하시겠습니까?")) {
-                      deleteGoal(goal.goalId);
-                    }
-                  }}
-                >
-                  <FiTrash2 />
-                </button>
-                <p>
-                  커리큘럼:{" "}
-                  {goal.curriculumId ? `${goal.curriculumId}` : "없음"}
-                </p>
-                <p>상태: {goal.completed ? "✅ 완료" : "💦 진행 중"}</p>
-                <div className="todobtn-wrapper">
-                  <button
-                    className="todo-edit-button"
-                    onClick={() => {
-                      setIsEdit(true);
-                      setInitialGoal(goal);
-                      setIsOpen(true);
-                    }}
-                  >
-                    수정
-                  </button>
-                  <button
-                    className="todo-completed-button"
-                    onClick={() => {
-                      if (window.confirm("해당 Todo를 완료하셨습니까?")) {
-                        toggleCompleteGoal(goal.goalId);
-                      }
-                    }}
-                  >
-                    완료
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
         )}
       </div>
     </div>

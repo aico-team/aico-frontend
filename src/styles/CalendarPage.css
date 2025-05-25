@@ -1,15 +1,106 @@
+.calendar-layout {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.calendar-box {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.react-calendar {
+  width: 100%;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 16px;
+}
+
+.react-calendar__tile {
+  padding: 1.5rem 0 !important;
+  min-height: 60px;
+  border-radius: 8px;
+  color: #666666;
+}
+
+.react-calendar__tile:hover {
+  background-color: #f0f8ff;
+  transition: background-color 0.2s ease;
+}
+
+.react-calendar__tile--now {
+  background: #6ed3c7 !important;
+  color: white !important;
+}
+
+.react-calendar__tile--active {
+  background: #b3e7e2 !important;
+  color: white !important;
+}
+
+.react-calendar__month-view__weekdays {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.hide-other-month {
+  visibility: hidden;
+}
+
+.react-calendar__navigation {
+  margin-bottom: 0.5rem;
+}
+
+.react-calendar__navigation button {
+  font-weight: bold;
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.calendar-status-wrapper {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 2px;
+  height: 16px;
+  line-height: 16px;
+}
+
 .goal-list {
   background: #b3e7e2;
-  margin-top: 1rem;
+  width: 600px;
+  margin-bottom: 2rem;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.goal-list h3 {
+  margin-left: 0.9rem; /* 카드 시작 위치에 맞게 조정 */
 }
 
 .goal-card-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  align-items: center;
+  justify-items: center;
 }
 
 .goal-card {
@@ -27,10 +118,10 @@
 }
 
 .goal-card h4 {
-  margin-right: 40px; /* 삭제 버튼 공간 확보 */
+  margin-right: 40px;
   font-size: 16px;
   font-weight: bold;
-  max-height: 3.2em; /* 줄 높이 1.6em × 2줄 */
+  max-height: 3.2em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
