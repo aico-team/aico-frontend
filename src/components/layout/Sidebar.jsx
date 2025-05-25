@@ -40,7 +40,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/QnaPage">
               <IoIosChatboxes />
               챗봇과의 대화
             </Link>
