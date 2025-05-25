@@ -25,40 +25,7 @@ const TodoList = () => {
       try {
         await fetchGoals();
       } catch (err) {
-        console.warn("⚠️ 목표 불러오기 실패, 더미 데이터로 대체", err);
-        const todayStr = format(new Date(), "yyyy-MM-dd");
-        useGoalStore.setState({
-          goals: [
-            {
-              goalId: 1,
-              goalName: "운영체제 정리",
-              deadLine: todayStr,
-              curriculumId: 1,
-              completed: false,
-            },
-            {
-              goalId: 2,
-              goalName: "GPT API 테스트",
-              deadLine: todayStr,
-              curriculumId: null,
-              completed: true,
-            },
-            {
-              goalId: 3,
-              goalName: "토픽 아이디어 정리",
-              deadLine: todayStr,
-              curriculumId: null,
-              completed: false,
-            },
-            {
-              goalId: 4,
-              goalName: "토픽 아이디어",
-              deadLine: todayStr,
-              curriculumId: 2,
-              completed: false,
-            },
-          ],
-        });
+        console.warn("⚠️ 목표 불러오기 실패", err);
       }
     };
 
