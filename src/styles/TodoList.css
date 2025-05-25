@@ -1,0 +1,45 @@
+.todo-list-page {
+  width: 100%;
+  padding: 2rem 2rem;
+}
+
+.todo-list-page h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.goal-section {
+  background-color: #d8f5f2;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.goal-section h2 {
+  font-size: 1.25rem;
+  color: #333;
+  background-color: white;
+  border-radius: 8px;
+  padding: 4px 12px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.goal-items {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.goal-items li {
+  font-size: 0.95rem;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.goal-items li.completed-goal {
+  color: #aaa;
+  text-decoration: none;
+}

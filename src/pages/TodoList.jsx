@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { format } from "date-fns";
 import useCurriculumStore from "../../stores/curriculumStore";
 import useGoalStore from "../../stores/goalStore";
+import "../styles/TodoList.css";
 
 const groupByCurriculum = (goals) => {
   const grouped = {};
@@ -49,6 +50,13 @@ const TodoList = () => {
               curriculumId: null,
               completed: false,
             },
+            {
+              goalId: 4,
+              goalName: "토픽 아이디어",
+              deadLine: todayStr,
+              curriculumId: 2,
+              completed: false,
+            },
           ],
         });
       }
@@ -77,7 +85,12 @@ const TodoList = () => {
             <h2>{title}</h2>
             <ul className="goal-items">
               {goalList.map((goal) => (
-                <li key={goal.goalId}>{goal.goalName}</li>
+                <li
+                  key={goal.goalId}
+                  className={goal.completed ? "completed-goal" : ""}
+                >
+                  {goal.completed ? "✅" : "💦"} {goal.goalName}
+                </li>
               ))}
             </ul>
           </section>
