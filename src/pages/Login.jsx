@@ -48,14 +48,14 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="bright-web"></div>
+      <div className="logo">Aico</div>
       <form onSubmit={handleSubmit}>
-        <h1>로그인</h1>
+        {/* <h1>로그인</h1> 삭제 */}
         <div>
           <div>
             <label htmlFor="email">이메일</label>
           </div>
-          <input className="text-field"
+          <input className="input-email"
             type="email"
             id="email"
             name="email"
@@ -68,7 +68,7 @@ const Login = () => {
           <div>
             <label htmlFor="password">비밀번호</label>
           </div>
-          <input
+          <input className="input-password"
             type="password"
             id="password"
             name="password"

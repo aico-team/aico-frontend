@@ -1,86 +1,53 @@
-/* Bright Web */
-.bright-web {
-  position: absolute;
-  height: 70px;
-  left: 0%;
-  right: 6.48%;
-  top: calc(50% - 70px/2 + 21px);
+/* Login Container */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px; /* 필요 시 조정 */
+}
 
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
+.logo {
+  color: #6edac9;
+  font-weight: bold;
   font-size: 60px;
-  line-height: 70px;
-  text-align: center;
-  color: #6ED3C7;
+  margin-bottom: 20px;
 }
 
-
-/* Button */
-.button {
-  position: absolute;
-  width: 478px;
-  height: 64px;
-  left: 481px;
-  top: 443px;
-
-  background: #6ED3C7;
-  border-radius: 32px;
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;  /* 입력창과 버튼 너비 동일하게 */
+  width: 100%;
+  max-width: 478px;
+  gap: 12px;
 }
 
-/* Label */
-.label {
-  position: absolute;
-  width: 45px;
-  height: 24px;
-  left: 0;
-  top: 0;
-
-  font-family: 'Poppins', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #666666;
-}
-
-/* Text Field */
-.text-field {
-  box-sizing: border-box;
-  position: absolute;
-  width: 478px;
-  height: 56px;
-  left: 0;
-  top: 31px;
-  background: #FFFFFF;
-  border: 1px solid rgba(102, 102, 102, 0.35);
-  border-radius: 12px;
-}
-
-/* Input Label (for text field) */
-.input-label {
-  position: absolute;
-  width: 59px;
-  height: 24px;
-  left: 0;
-  top: 0;
-
-  font-family: 'Poppins', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #666666;
+.input-email,
+.input-password {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
 }
 
 /* Button */
 .button {
-  position: absolute;
   width: 478px;
   height: 64px;
-  left: 481px;
-  top: 443px;
 
   background: #6ED3C7;
   border-radius: 32px;
+  border: 1px solid #FFFFFF;
+
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  margin-top: 24px; /* 입력창과 간격 */
 }
+
+
+
+
