@@ -167,3 +167,13 @@
   font-size: 12px;
   cursor: pointer;
 }
+
+.curriculum-link {
+  color: #6ed3c7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.curriculum-link:hover {
+  color: #1d4ed8;
+}

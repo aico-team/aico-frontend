@@ -6,6 +6,7 @@ import { FiTrash2 } from "react-icons/fi";
 import GoalModal from "../components/GoalModal";
 import useGoalStore from "../../stores/goalStore";
 import "../styles/CalendarPage.css";
+import { useNavigate } from "react-router-dom";
 
 const CalendarPage = () => {
   const [value, setValue] = useState(new Date());
@@ -15,8 +16,7 @@ const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isEdit, setIsEdit] = useState(false);
   const [initialGoal, setInitialGoal] = useState(null);
-
-  console.log(goals);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadGoals = async () => {
@@ -76,7 +76,7 @@ const CalendarPage = () => {
                 ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"][date.getDay()]
               }
               formatDay={(locale, date) => date.getDate().toString()}
-              tileClassName={({ date, view }) => {
+              tileClassName={({ date }) => {
                 const isOtherMonth = date.getMonth() !== value.getMonth();
                 return isOtherMonth ? "hide-other-month" : "";
               }}
@@ -135,7 +135,16 @@ const CalendarPage = () => {
                   </button>
                   <p>
                     커리큘럼:{" "}
-                    {goal.curriculumId ? `${goal.curriculumId}` : "없음"}
+                    {goal.curriculumId ? (
+                      <span
+                        className="curriculum-link"
+                        onClick={() => navigate("/CurriculumList")}
+                      >
+                        {`커리큘럼 ${goal.curriculumId}`}
+                      </span>
+                    ) : (
+                      "없음"
+                    )}
                   </p>
                   <p>상태: {goal.completed ? "✅ 완료" : "💦 진행 중"}</p>
                   <div className="todobtn-wrapper">
