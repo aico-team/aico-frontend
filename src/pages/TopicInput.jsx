@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../lib/apiClient";
+import "../styles/TopicInput.css"; 
 
 const TopicInput = ({ setCurriculum, setTopic }) => {
   const [input, setInput] = useState({
@@ -52,10 +53,10 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
   };
 
   return (
-    <div>
+    <div className="curriculum-manage-container">
       <form onSubmit={handleSubmit}>
         <h1> Q. 공부하고 싶은 토픽이 무엇인가요?</h1>
-        <div>
+        <div className="curriculum-input-wrapper">
           <input
             type="text"
             id="topic"
@@ -65,21 +66,24 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
             placeholder="토픽을 입력해주세요"
             required
           />
-          <input
-            type="number"
-            id="stage"
-            name="stage"
-            value={input.stage}
-            onChange={onChange}
-            placeholder="단계 수 (3~6)"
-            min="3"
-            max="6"
-            required
-          />
-          <button type="submit">확인</button>
+          <div className="info-icon">↑</div>
         </div>
+
+        <input
+          type="number"
+          id="stage"
+          name="stage"
+          value={input.stage}
+          onChange={onChange}
+          placeholder="단계 수 (3~6)"
+          min="3"
+          max="6"
+          required
+          className="stage-input"
+        />
+        <button type="submit" className="submit-btn">확인</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <h6>
+        <h6 className="guide-text">
           원하는 분야, 기술 등을 키워드로 입력하면 AI가 입력 정보를 기반으로
           커리큘럼을 추천해 드려요.
         </h6>
