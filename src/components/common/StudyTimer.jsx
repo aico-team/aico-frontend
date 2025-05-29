@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStudyTimeStore from "../../../stores/studyTimeStore";
 
 const StudyTimer = () => {
-  const { isRunning, startTimer, stopTimer, formattedTime } =
+  const { isRunning, startTimer, stopTimer, formattedTime, loadFromStorage } =
     useStudyTimeStore();
+
+  useEffect(() => {
+    loadFromStorage();
+  }, [loadFromStorage]);
+
   return (
     <div>
       <h2>{formattedTime()}</h2>
