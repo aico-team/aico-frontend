@@ -1,0 +1,63 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px; 
+}
+
+.logo {
+  color: #6edac9;
+  font-weight: bold;
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; 
+  width: 100%;
+  max-width: 478px;
+  gap: 12px;
+}
+
+.input-nickname,
+.input-email,
+.input-password,
+.input-confirmPassword {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.button {
+  width: 478px;
+  height: 64px;
+
+  background: #6ED3C7;
+  border-radius: 32px;
+  border: 1px solid #FFFFFF;
+
+  font-size: 16px;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  margin-top: 24px; 
+}
+
+.confirmButton {
+  width: 95px;
+  height: 30px;
+
+  background: #b6b8b7;
+  border-radius: 12px;
+  border: 1px solid #FFFFFF;
+
+  font-size: 11px;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  margin-top: 4px; 
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiClient from "../lib/apiClient";
 import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -46,14 +47,15 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <div className="logo">Aico</div>
       <form onSubmit={handleSubmit}>
-        <h1>로그인</h1>
+        {/* <h1>로그인</h1> 삭제 */}
         <div>
           <div>
             <label htmlFor="email">이메일</label>
           </div>
-          <input
+          <input className="input-email"
             type="email"
             id="email"
             name="email"
@@ -66,7 +68,7 @@ const Login = () => {
           <div>
             <label htmlFor="password">비밀번호</label>
           </div>
-          <input
+          <input className="input-password"
             type="password"
             id="password"
             name="password"
@@ -77,7 +79,7 @@ const Login = () => {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div>
-          <button type="submit">로그인</button>
+          <button type="submit" className="button">로그인</button>
         </div>
       </form>
     </div>
