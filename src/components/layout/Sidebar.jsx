@@ -40,7 +40,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/QnaPage">
               <IoIosChatboxes />
               챗봇과의 대화
             </Link>
@@ -50,13 +50,13 @@ const Sidebar = () => {
         <div className="sidebar-subsection">상세 페이지</div>
         <ul>
           <li>
-            <Link to="/">
+            <Link to="/Calendar">
               <AiFillSchedule />
               월간 플래너
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/TodoList">
               <FaListCheck />
               to-do 리스트
             </Link>
