@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useStudyStatStore from "../../stores/studyStatStore";
 import StudyTimeChart from "../components/StudyTimeChart";
 import StudyTimeBarChart from "../components/StudyTimeBarChart";
+import "../styles/MyProgress.css";
 
 const MyProgress = () => {
   const {
@@ -42,35 +43,51 @@ const MyProgress = () => {
   };
 
   return (
-    <div>
-      <h1>📊 나의 진행도</h1>
+    <div className="progress-page">
+      <h1 className="title">📊 나의 진행도</h1>
 
-      <div>
-        <p>✅ 오늘 공부한 시간: {todayStudyTime ?? "로딩 중..."}</p>
-        <p>🔥 연속 공부 일수: {streakCount ?? "로딩 중..."}</p>
-      </div>
+      <section className="summary-grid">
+        <div className="summary-card">
+          <p>✅ 오늘 공부한 시간: {todayStudyTime ?? "로딩 중..."}</p>
+        </div>
+        <div className="summary-card">
+          <p>🔥 연속 공부 일수: {streakCount ?? "로딩 중..."} </p>
+        </div>
+      </section>
 
-      <div>
-        <h3>📅 일간 공부 시간</h3>
-        <label>시작일: </label>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <label>종료일: </label>
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        <button onClick={handleDateSearch}>조회</button>
-        <StudyTimeBarChart />
-      </div>
+      <div className="content-grid char-grid">
+        <div className="chart-summary-card">
+          <section className="chart-section">
+            <h3>📅 기간 지정 공부 시간</h3>
+            <div className="date-inputs">
+              <label>
+                시작일
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </label>
+              <label>
+                종료일
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </label>
+              <button onClick={handleDateSearch}>조회</button>
+            </div>
+            <StudyTimeBarChart />
+          </section>
+        </div>
 
-      <div>
-        <h3>📈 주간 공부 시간</h3>
-        <StudyTimeChart />
+        <div className="chart-summary-card">
+          <section className="chart-section">
+            <h3>📈 주간 공부 시간</h3>
+            <StudyTimeChart />
+          </section>
+        </div>
       </div>
     </div>
   );

@@ -20,6 +20,10 @@ const StudyTimeBarChart = () => {
       }))
     : [];
 
+  if (!data.length) {
+    return <p style={{ textAlign: "center" }}>📉 표시할 데이터가 없습니다.</p>;
+  }
+
   return (
     <div style={{ maxWidth: "700px", margin: "0 auto" }}>
       <ResponsiveContainer maxWidth="100%" height={300}>
@@ -31,7 +35,7 @@ const StudyTimeBarChart = () => {
           <XAxis dataKey="date" />
           <YAxis unit="분" />
           <Tooltip />
-          <Bar dataKey="minutes" fill="#82ca9d" />
+          <Bar dataKey="minutes" fill="#6edac9" />
         </BarChart>
       </ResponsiveContainer>
     </div>

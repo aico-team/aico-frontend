@@ -39,8 +39,12 @@ const StudyTimeChart = () => {
 
   console.log("📊 그래프 데이터 확인:", data);
 
+  if (!data.length) {
+    return <p style={{ textAlign: "center" }}>📉 표시할 데이터가 없습니다.</p>;
+  }
+
   return (
-    <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+    <div style={{ paddingTop: "80px", width: "100%", height: "100%" }}>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart
           data={data}
