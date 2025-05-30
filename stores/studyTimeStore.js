@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import apiClient from "../src/lib/apiClient";
 
 const STORAGE_KEY = "study_timer";
 
@@ -6,6 +7,7 @@ const useStudyTimeStore = create((set, get) => ({
   seconds: 0,
   isRunning: false,
   intervalId: null,
+  syncId: null,
 
   startTimer: () => {
     if (get().isRunning) return;
@@ -25,14 +27,20 @@ const useStudyTimeStore = create((set, get) => ({
       });
     }, 1000);
 
-    set({ isRunning: true, intervalId: id });
+    //1분간격 서버 전송 타이머ID
+    const sync = setInterval(() => {
+      get().syncWithServer();
+    }, 60000);
+
+    set({ isRunning: true, intervalId: id, syncId: sync });
   },
 
   stopTimer: () => {
-    const id = get().intervalId;
-    if (id) {
-      clearInterval(id);
-    }
+    const { intervalId, syncId } = get();
+    if (intervalId) clearInterval(intervalId);
+    if (syncId) clearInterval(syncId);
+
+    get().syncWithServer();
 
     localStorage.setItem(
       STORAGE_KEY,
@@ -43,7 +51,17 @@ const useStudyTimeStore = create((set, get) => ({
       })
     );
 
-    set({ isRunning: false, intervalId: null });
+    set({ isRunning: false, intervalId: null, syncId: null });
+  },
+
+  syncWithServer: async () => {
+    try {
+      const duration = get().seconds;
+      await apiClient.post("/study-time", { duration });
+      console.log("공부 시간 서버 전송 성공:", duration, "초");
+    } catch (err) {
+      console.error("공부 시간 전송 실패:", err);
+    }
   },
 
   formattedTime: () => {
@@ -61,7 +79,7 @@ const useStudyTimeStore = create((set, get) => ({
     const parsed = JSON.parse(data);
     const { seconds, startedAt, isRunning } = parsed;
 
-    //흐른 시간 반영
+    //브라우저를 닫은 후 흐른 시간 반영
     const elapsed = Math.floor((Date.now() - startedAt) / 1000);
     const newSeconds = seconds + (isRunning ? elapsed : 0);
 
