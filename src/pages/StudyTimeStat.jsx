@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import useStudyStatStore from "../../stores/studyStatStore";
 import StudyTimeChart from "../components/StudyTimeChart";
 import StudyTimeBarChart from "../components/StudyTimeBarChart";
-import "../styles/MyProgress.css";
+import "../styles/StudyTimeStat.css";
 
-const MyProgress = () => {
+const StudyTimeStat = () => {
   const {
     todayStudyTime,
     streakCount,
@@ -44,7 +44,7 @@ const MyProgress = () => {
 
   return (
     <div className="progress-page">
-      <h1 className="title">📊 나의 진행도</h1>
+      <h1 className="title">📊 공부 시간</h1>
 
       <section className="summary-grid">
         <div className="summary-card">
@@ -93,4 +93,4 @@ const MyProgress = () => {
   );
 };
 
-export default MyProgress;
+export default StudyTimeStat;

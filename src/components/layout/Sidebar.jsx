@@ -22,7 +22,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/StudyTimeStat">
               <MdAccessTimeFilled />
               공부 시간
             </Link>
@@ -68,7 +68,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/MyProgress">
+            <Link to="/">
               <FaBarsProgress />
               나의 진행도
             </Link>
