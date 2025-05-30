@@ -12,6 +12,7 @@ import Landing from "../components/layout/Landing";
 import QnaPage from "../pages/QnaPage";
 import CalendarPage from "../pages/CalendarPage";
 import TodoList from "../pages/TodoList";
+import MyProgress from "../pages/MyProgress";
 
 export default function AppRoutes() {
   const [curriculum, setCurriculum] = useState(null);
@@ -42,6 +43,7 @@ export default function AppRoutes() {
           <Route path="/QnaPage" element={<QnaPage />} />
           <Route path="/Calendar" element={<CalendarPage />} />
           <Route path="/TodoList" element={<TodoList />} />
+          <Route path="/MyProgress" element={<MyProgress />} />
         </Route>
       </Routes>
     </Router>

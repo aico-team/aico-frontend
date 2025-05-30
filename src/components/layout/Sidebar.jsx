@@ -68,7 +68,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/MyProgress">
               <FaBarsProgress />
               나의 진행도
             </Link>
