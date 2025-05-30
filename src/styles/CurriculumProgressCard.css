@@ -1,0 +1,20 @@
+.curriculum-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.curriculum-progress-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f7f9;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.curriculum-progress-item .topic {
+  font-weight: 600;
+  font-size: 1rem;
+}

@@ -1,0 +1,14 @@
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+}
+
+.calendar-icon {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.hide-other-month {
+  color: #ccc;
+}
