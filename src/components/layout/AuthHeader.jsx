@@ -4,7 +4,8 @@ import "../../styles/AuthHeader.css";
 import useAuthStore from "../../../stores/authStore";
 
 const AuthHeader = () => {
-  const { user, setUser } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const stored = localStorage.getItem("user");
