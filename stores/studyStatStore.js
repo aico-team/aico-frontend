@@ -27,17 +27,57 @@ const useStudyStatStore = create((set) => ({
   },
 
   fetchDailyStats: async (userId, start, end) => {
-    const response = await apiClient.get(`/study-time/daily`, {
-      params: { userId, start, end },
-    });
-    set({ dailyStats: response.data });
+    try {
+      const response = await apiClient.get(`/study-time/daily`, {
+        params: { userId, start, end },
+      });
+
+      if (!Array.isArray(response.data) || response.data.length === 0) {
+        throw new Error("Invalid dailyStats data");
+      }
+      set({ dailyStats: response.data });
+    } catch (error) {
+      console.warn("dailyStats API 실패 - 더미 데이터 사용", error);
+
+      set({
+        dailyStats: [
+          { date: "2025-05-25", minutes: 30 },
+          { date: "2025-05-26", minutes: 45 },
+          { date: "2025-05-27", minutes: 20 },
+          { date: "2025-05-28", minutes: 60 },
+          { date: "2025-05-29", minutes: 50 },
+          { date: "2025-05-30", minutes: 70 },
+          { date: "2025-05-31", minutes: 90 },
+        ],
+      });
+    }
   },
 
   fetchWeeklyStats: async (userId, date) => {
-    const response = await apiClient.get(`/study-time/weekly`, {
-      params: { userId, date },
-    });
-    set({ weeklyStats: response.data });
+    try {
+      const response = await apiClient.get(`/study-time/weekly`, {
+        params: { userId, date },
+      });
+
+      if (!Array.isArray(response.data) || response.data.length === 0) {
+        throw new Error("Invalid weeklyStats data");
+      }
+
+      set({ weeklyStats: response.data });
+    } catch (error) {
+      console.warn("weeklyStats API 실패 - 더미 데이터 사용", error);
+      set({
+        weeklyStats: [
+          { date: "2025-05-25", minutes: 30 },
+          { date: "2025-05-26", minutes: 45 },
+          { date: "2025-05-27", minutes: 20 },
+          { date: "2025-05-28", minutes: 60 },
+          { date: "2025-05-29", minutes: 50 },
+          { date: "2025-05-30", minutes: 70 },
+          { date: "2025-05-31", minutes: 90 },
+        ],
+      });
+    }
   },
 }));
 
