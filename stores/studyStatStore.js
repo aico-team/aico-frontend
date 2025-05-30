@@ -70,10 +70,8 @@ const useStudyStatStore = create((set) => ({
         weeklyStats: [
           { date: "2025-05-25", minutes: 30 },
           { date: "2025-05-26", minutes: 45 },
-          { date: "2025-05-27", minutes: 20 },
           { date: "2025-05-28", minutes: 60 },
-          { date: "2025-05-29", minutes: 50 },
-          { date: "2025-05-30", minutes: 70 },
+          { date: "2025-05-29", minutes: 0 },
           { date: "2025-05-31", minutes: 90 },
         ],
       });

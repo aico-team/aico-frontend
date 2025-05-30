@@ -10,15 +10,32 @@ import {
 } from "recharts";
 import useStudyStatStore from "../../stores/studyStatStore";
 
+const formatDate = (date) => date.toISOString().split("T")[0];
+
+//오늘 기준 일주일 날짜 배열 생성
+const getLast7Days = () => {
+  const dates = [];
+  const today = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i);
+    dates.push(formatDate(date));
+  }
+  return dates;
+};
+
 const StudyTimeChart = () => {
   const { weeklyStats } = useStudyStatStore();
 
-  const data = Array.isArray(weeklyStats)
-    ? weeklyStats.map((item) => ({
-        date: item.date,
-        minutes: item.minutes,
-      }))
-    : [];
+  //공부 안 한 날짜는 응답에 포함되지 않기에 minutes:0으로 처리
+  const statsMap = new Map(
+    weeklyStats.map((item) => [item.date, item.minutes])
+  );
+
+  const data = getLast7Days().map((date) => ({
+    date,
+    minutes: statsMap.get(date) ?? 0,
+  }));
 
   console.log("📊 그래프 데이터 확인:", data);
 
