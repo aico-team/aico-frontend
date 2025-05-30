@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import useStudyTimeStore from "../../../stores/studyTimeStore";
+import TimerCard from "./TimerCard";
 
 const StudyTimer = () => {
-  const { startTimer, stopTimer, formattedTime, loadFromStorage } =
+  const { isRunning, startTimer, stopTimer, formattedTime, loadFromStorage } =
     useStudyTimeStore();
 
   useEffect(() => {
@@ -18,11 +19,12 @@ const StudyTimer = () => {
   }, [loadFromStorage, stopTimer]);
 
   return (
-    <div>
-      <h2>{formattedTime()}</h2>
-      <button onClick={startTimer}>시작</button>
-      <button onClick={stopTimer}>정지</button>
-    </div>
+    <TimerCard
+      time={formattedTime()}
+      isRunning={isRunning}
+      onStart={startTimer}
+      onStop={stopTimer}
+    />
   );
 };
 

@@ -1,0 +1,35 @@
+.timer-card {
+  background-color: #d9f6f4;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  margin: 0 auto;
+}
+
+.timer-label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.timer-time {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.timer-buttons button {
+  padding: 10px 16px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.timer-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
