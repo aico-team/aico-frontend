@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import apiClient from "../lib/apiClient";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
+import useAuthStore from "../../stores/authStore";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -10,6 +11,8 @@ const Login = () => {
   });
 
   const [error, setError] = useState(null);
+
+  const { setUser } = useAuthStore();
 
   const navigate = useNavigate();
 
@@ -30,13 +33,20 @@ const Login = () => {
         password: input.password,
       });
 
-      console.log("로그인에 성공했습니다.", response.data);
-
-      //Authorization 헤더에서 토큰 읽기
+      //accessToken 저장
       const rawHeader = response.headers["authorization"];
       const accessToken = rawHeader?.split(" ")[1];
-      //Access Token은 localStorage에 저장
       localStorage.setItem("accessToken", accessToken);
+
+      //사용자 정보 저장
+      const userData = {
+        userId: response.data.userId,
+        nickname: response.data.nickname,
+      };
+      localStorage.setItem("user", JSON.stringify(userData));
+      setUser(userData);
+
+      console.log("로그인에 성공했습니다.", response.data);
 
       //로그인 성공 후 사용자를 대시보드 등 보호된 페이지로 이동
       navigate("/dashboard");
@@ -55,7 +65,8 @@ const Login = () => {
           <div>
             <label htmlFor="email">이메일</label>
           </div>
-          <input className="input-email"
+          <input
+            className="input-email"
             type="email"
             id="email"
             name="email"
@@ -68,7 +79,8 @@ const Login = () => {
           <div>
             <label htmlFor="password">비밀번호</label>
           </div>
-          <input className="input-password"
+          <input
+            className="input-password"
             type="password"
             id="password"
             name="password"
@@ -79,7 +91,9 @@ const Login = () => {
         </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div>
-          <button type="submit" className="button">로그인</button>
+          <button type="submit" className="button">
+            로그인
+          </button>
         </div>
       </form>
     </div>

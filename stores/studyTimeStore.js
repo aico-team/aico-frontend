@@ -56,9 +56,20 @@ const useStudyTimeStore = create((set, get) => ({
 
   syncWithServer: async () => {
     try {
-      const duration = get().seconds;
-      await apiClient.post("/study-time", { duration });
-      console.log("공부 시간 서버 전송 성공:", duration, "초");
+      const totalSeconds = get().seconds;
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user?.userId;
+
+      if (!userId) {
+        console.warn("userID 없음 공부 시간 저장 중단");
+        return;
+      }
+
+      await apiClient.post(
+        `/study-time?userId=${userId}&totalSeconds=${totalSeconds}`
+      );
+      console.log("공부 시간 서버 전송 성공:", totalSeconds, "초");
     } catch (err) {
       console.error("공부 시간 전송 실패:", err);
     }
