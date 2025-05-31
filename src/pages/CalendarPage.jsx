@@ -63,10 +63,6 @@ const CalendarPage = () => {
                 ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"][date.getDay()]
               }
               formatDay={(locale, date) => date.getDate().toString()}
-              tileClassName={({ date }) => {
-                const isOtherMonth = date.getMonth() !== value.getMonth();
-                return isOtherMonth ? "hide-other-month" : "";
-              }}
               tileContent={({ date }) => {
                 const dayStr = format(date, "yyyy-MM-dd");
                 const goalsForDay = goals.filter(

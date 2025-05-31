@@ -55,10 +55,6 @@
   border-bottom: none;
 }
 
-.hide-other-month {
-  visibility: hidden;
-}
-
 .react-calendar__navigation {
   margin-bottom: 0.5rem;
 }
@@ -91,7 +87,7 @@
 }
 
 .goal-list h3 {
-  margin-left: 0.9rem; /* 카드 시작 위치에 맞게 조정 */
+  margin-left: 0.9rem;
 }
 
 .goal-card-container {
