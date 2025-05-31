@@ -36,9 +36,8 @@
   grid-template-rows: repeat(5, 1fr); /* 최대 5줄 */
 }
 
-/* 2. 각 날짜 셀을 정사각형으로 만들기 */
 .react-calendar__tile {
-  aspect-ratio: 1 / 1; /* ✅ 정사각형 만들기 */
+  aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,7 +70,7 @@
 
 .calendar-icon {
   text-align: center;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .hide-other-month {
