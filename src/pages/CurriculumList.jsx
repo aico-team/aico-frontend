@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import useCurriculumStore from "../../stores/curriculumStore";
 import ProgressCircle from "../components/common/ProgressCircle";
 import "../styles/CurriculumList.css";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { useLocation } from "react-router-dom";
 
 const CurriculumList = () => {
   //여러 개의 커리큘럼 객체가 들어있는 배열 curriculum
@@ -20,9 +21,22 @@ const CurriculumList = () => {
     loadingSteps,
   } = useCurriculumStore();
 
+  const location = useLocation();
+  const highlightId = location.state?.highlightId;
+  const cardRefs = useRef({});
+
   useEffect(() => {
     fetchCurriculumList();
   }, [fetchCurriculumList]);
+
+  useEffect(() => {
+    if (highlightId && cardRefs.current[highlightId]) {
+      cardRefs.current[highlightId].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [curriculums, highlightId]);
 
   if (isLoading) {
     return <p className="empty-message">불러오는 중입니다...</p>;
@@ -39,7 +53,11 @@ const CurriculumList = () => {
             const percent = progressMap[curri.id] || 0;
 
             return (
-              <div className="curriculum-card" key={curri.id}>
+              <div
+                ref={(el) => (cardRefs.current[curri.id] = el)}
+                className={`curriculum-card ${curri.id === highlightId ? "highlight" : ""}`}
+                key={curri.id}
+              >
                 <div className="curriculum-header">
                   <div className="topic-progress-wrap">
                     <h2 className="curriculum-topic">📘 {curri.topic}</h2>

@@ -1,7 +1,11 @@
-/* CurriculumList.css */
 .curriculum-list-container {
   width: 100%;
-  padding: 2rem 2rem;
+  height: 100vh;
+  padding: 1rem 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .curriculum-title {
@@ -18,17 +22,44 @@
 }
 
 .curriculum-scroll {
-  max-height: 70vh;
+  flex: 1;
+  max-height: 100vh;
   overflow-y: auto;
   padding-right: 4px;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.curriculum-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .curriculum-card {
   background-color: #d8f5f2;
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.curriculum-card:hover {
+  background-color: #e0f7ff;
+}
+
+.curriculum-card.highlight {
+  border: 2px solid #66bc22;
+  background-color: #f0fff4;
+  animation: highlight-fade 0.8s ease;
+}
+
+@keyframes highlight-fade {
+  0% {
+    background-color: #e3ffe9;
+  }
+  100% {
+    background-color: #f0fff4;
+  }
 }
 
 .curriculum-header {
@@ -39,12 +70,15 @@
 }
 
 .topic-progress-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: space-between;
   align-items: center;
-  gap: 4px;
+  gap: 1rem;
 }
 
 .curriculum-topic {
+  flex: 1;
   font-size: 1.25rem;
   color: #333;
   background-color: white;
@@ -52,6 +86,7 @@
   padding: 2px 8px;
   margin: 0;
   display: inline-block;
+  word-break: keep-all;
 }
 
 .delete-button {
