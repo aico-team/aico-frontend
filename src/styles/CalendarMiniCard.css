@@ -1,12 +1,77 @@
-.react-calendar {
+.calendar-scale {
+  transform-origin: top center;
   width: 100%;
+  max-width: 352px;
+  margin: 0;
+}
+
+.calendar-mini-wrapper {
+  width: 352px;
+  height: 320px;
+  display: flex;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  text-align: center;
+}
+
+.react-calendar {
+  font-size: 0.85rem;
+  width: 100%;
+  max-width: 350px;
+  height: 410px;
+  transform-origin: top center;
   border: none;
   font-family: inherit;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr); /* 최대 5줄 */
+}
+
+/* 2. 각 날짜 셀을 정사각형으로 만들기 */
+.react-calendar__tile {
+  aspect-ratio: 1 / 1; /* ✅ 정사각형 만들기 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  margin: 0;
+  font-size: 1;
+  overflow: hidden;
+}
+
+/* 날짜 셀을 감싸는 그리드 영역에서 마지막 줄 숨기기 */
+.react-calendar__month-view__days > .react-calendar__tile:nth-child(n + 36) {
+  display: none;
+}
+
+.react-calendar__tile abbr {
+  display: block;
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.react-calendar__tile span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
 }
 
 .calendar-icon {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.5rem;
 }
 
 .hide-other-month {

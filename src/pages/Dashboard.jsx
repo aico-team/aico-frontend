@@ -4,6 +4,7 @@ import useAuthStore from "../../stores/authStore";
 import useStudyStatStore from "../../stores/studyStatStore";
 import CalendarMiniCard from "../components/dashboard/CalendarMiniCard";
 import CurriculumProgressCard from "../components/dashboard/CurriculumProgressCard";
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const { user } = useAuthStore();
@@ -16,27 +17,30 @@ const Dashboard = () => {
   }, [user?.userId]);
 
   return (
-    <div className="dashboard-container">
-      <div className="greeting-section">
-        <h2>{user?.nickname}님, 안녕하세요 👋</h2>
-        <p>🔥 {streakCount ?? 0}일째 공부중입니다!</p>
-      </div>
+    <div>
+      <div className="greeting-and-cards">
+        <div className="greeting-left">
+          <div className="greeting-section">
+            <h2>{user?.nickname}님, 안녕하세요 👋</h2>
+            <p>🔥 {streakCount ?? 0}일째 공부중입니다!</p>
+          </div>
 
-      <div className="dashboard-grid">
-        <div className="main-timer-card">
-          <StudyTimer />
+          <div className="left-card">
+            <StudyTimer />
+          </div>
         </div>
 
-        <div className="calendar-card">
+        <div className="right-card">
           <CalendarMiniCard />
         </div>
+      </div>
 
-        <div className="curriculum-card">
-          <CurriculumProgressCard />
-        </div>
-
-        <div className="message-card">
+      <div className="card-grid">
+        <div className="full-card message-card">
           <p>메시지 기능 준비중...</p>
+        </div>
+        <div className="full-card">
+          <CurriculumProgressCard />
         </div>
       </div>
     </div>

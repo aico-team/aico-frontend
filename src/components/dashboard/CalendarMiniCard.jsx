@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../../styles/CalendarMiniCard.css";
@@ -6,19 +7,30 @@ import { format } from "date-fns";
 import useGoalStore from "../../../stores/goalStore";
 
 const CalendarMiniCard = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState(new Date());
   const { goals, fetchGoals } = useGoalStore();
+
+  const thisYear = new Date().getFullYear();
+  const minDate = new Date(thisYear, 0, 1);
+  const maxDate = new Date(thisYear, 11, 31);
 
   useEffect(() => {
     fetchGoals();
   }, []);
 
   return (
-    <div>
+    <div className="calendar-scale">
       <Calendar
         onChange={setValue}
         value={value}
+        onClickDay={(value) => {
+          const dateStr = format(value, "yyyy-MM-dd");
+          navigate(`/calendar?date=${dateStr}`);
+        }}
         locale="en-us"
+        minDate={minDate}
+        maxDate={maxDate}
         formatShortWeekday={(locale, date) =>
           ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"][date.getDay()]
         }
@@ -39,9 +51,6 @@ const CalendarMiniCard = () => {
             </div>
           );
         }}
-        tileClassName={({ date }) =>
-          date.getMonth() !== value.getMonth() ? "hide-other-month" : ""
-        }
       />
     </div>
   );
