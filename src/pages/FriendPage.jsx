@@ -8,6 +8,7 @@ const FriendPage = () => {
   const { fetchFriends, fetchRequests } = useFriendStore();
 
   useEffect(() => {
+    console.log("📥 fetchFriends(), fetchRequests() 호출됨");
     fetchFriends();
     fetchRequests();
   }, [fetchFriends, fetchRequests]);

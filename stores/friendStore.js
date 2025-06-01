@@ -9,9 +9,28 @@ const useFriendStore = create((set) => ({
   fetchFriends: async () => {
     try {
       const response = await apiClient.get("/friend/list");
-      set({ friends: response.data });
+
+      if (Array.isArray(response.data)) {
+        set({ friends: response.data });
+      } else {
+        console.warn("⚠️ 예상치 못한 응답 형식, 더미로 대체됨");
+
+        set({
+          friends: [
+            { friendShipId: 1, friendNickname: "김은진" },
+            { friendShipId: 2, friendNickname: "김지호" },
+          ],
+        });
+      }
     } catch (err) {
       console.error("친구 목록 가져오기 실패:", err);
+      // 💡 백엔드 연결 실패 시 더미 데이터로 대체
+      set({
+        friends: [
+          { friendShipId: 1, friendNickname: "김은진" },
+          { friendShipId: 2, friendNickname: "김지호" },
+        ],
+      });
     }
   },
 
@@ -19,9 +38,27 @@ const useFriendStore = create((set) => ({
   fetchRequests: async () => {
     try {
       const response = await apiClient.get("/friend/request");
-      set({ receivedRequests: response.data });
+
+      if (Array.isArray(response.data)) {
+        set({ receivedRequests: response.data });
+      } else {
+        console.warn("⚠️ 예상치 못한 응답 형식, 더미로 대체됨");
+        set({
+          receivedRequests: [
+            { friendShipId: 101, friendNickname: "이프론트" },
+            { friendShipId: 102, friendNickname: "최풀스택" },
+          ],
+        });
+      }
     } catch (err) {
       console.error("요청 목록 가져오기에 실패:", err);
+      // 💡 실패 시 더미 요청 목록 사용
+      set({
+        receivedRequests: [
+          { friendShipId: 101, friendNickname: "이프론트" },
+          { friendShipId: 102, friendNickname: "최풀스택" },
+        ],
+      });
     }
   },
 
