@@ -7,6 +7,7 @@ import GoalModal from "../components/GoalModal";
 import useGoalStore from "../../stores/goalStore";
 import "../styles/CalendarPage.css";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const CalendarPage = () => {
   const [value, setValue] = useState(new Date());
@@ -16,7 +17,20 @@ const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isEdit, setIsEdit] = useState(false);
   const [initialGoal, setInitialGoal] = useState(null);
+  const [searchParams] = useSearchParams();
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const param = searchParams.get("date");
+    if (param) {
+      const parsed = new Date(param);
+      if (!isNaN(parsed)) {
+        setSelectedDate(parsed);
+        setValue(parsed);
+      }
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const loadGoals = async () => {
@@ -49,10 +63,6 @@ const CalendarPage = () => {
                 ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"][date.getDay()]
               }
               formatDay={(locale, date) => date.getDate().toString()}
-              tileClassName={({ date }) => {
-                const isOtherMonth = date.getMonth() !== value.getMonth();
-                return isOtherMonth ? "hide-other-month" : "";
-              }}
               tileContent={({ date }) => {
                 const dayStr = format(date, "yyyy-MM-dd");
                 const goalsForDay = goals.filter(
