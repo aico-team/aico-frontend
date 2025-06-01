@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import apiClient from "../lib/apiClient";
+import apiClient from "../src/lib/apiClient";
 
 const useFriendStore = create((set) => ({
   friends: [],
