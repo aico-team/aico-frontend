@@ -13,6 +13,7 @@ import QnaPage from "../pages/QnaPage";
 import CalendarPage from "../pages/CalendarPage";
 import TodoList from "../pages/TodoList";
 import StudyTimeStat from "../pages/StudyTimeStat";
+import FriendPage from "../pages/FriendPage";
 
 export default function AppRoutes() {
   const [curriculum, setCurriculum] = useState(null);
@@ -44,6 +45,7 @@ export default function AppRoutes() {
           <Route path="/Calendar" element={<CalendarPage />} />
           <Route path="/TodoList" element={<TodoList />} />
           <Route path="/StudyTimeStat" element={<StudyTimeStat />} />
+          <Route path="/FriendPage" element={<FriendPage />} />
         </Route>
       </Routes>
     </Router>

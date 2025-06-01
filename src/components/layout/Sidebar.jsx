@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "../../styles/Sidebar.css";
 //아이콘
 import { AiFillHome, AiFillSchedule } from "react-icons/ai";
-import { MdAccessTimeFilled, MdGroups, MdLogout } from "react-icons/md";
+import { MdAccessTimeFilled, MdLogout } from "react-icons/md";
 import { FcSettings } from "react-icons/fc";
 import { RiAiGenerate } from "react-icons/ri";
 import { IoMdList, IoIosChatboxes } from "react-icons/io";
 import { FaListCheck, FaBarsProgress } from "react-icons/fa6";
 import { IoLogoWechat } from "react-icons/io5";
+import { FaUserFriends } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
@@ -62,9 +63,9 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
-              <MdGroups />
-              그룹
+            <Link to="/FriendPage">
+              <FaUserFriends />
+              친구
             </Link>
           </li>
           <li>
