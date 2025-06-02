@@ -10,8 +10,7 @@ const FriendsList = () => {
   }
 
   return (
-    <div>
-      <h2>내 친구 목록</h2>
+    <div className="friend-list-container">
       {friends.length === 0 ? (
         <p>등록된 친구가 없습니다.</p>
       ) : (

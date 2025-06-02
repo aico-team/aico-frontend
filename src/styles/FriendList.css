@@ -1,0 +1,13 @@
+.friends-list-container {
+  margin-top: 20px;
+}
+
+.friends-list-container h2 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.friends-list-container p {
+  font-size: 0.95rem;
+  color: #777;
+}

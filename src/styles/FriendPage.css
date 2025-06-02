@@ -1,0 +1,38 @@
+.friend-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 79vh;
+  max-height: 79vh;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  margin-top: 0px;
+}
+
+.friend-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.friend-page-header h1 {
+  font-size: 1.8rem;
+}
+
+.friend-add-button {
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  background-color: #6edac9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.friend-add-button:hover {
+  background-color: #31dbc2;
+}

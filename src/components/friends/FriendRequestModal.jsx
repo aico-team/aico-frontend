@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useFriendStore from "../../../stores/friendStore";
+import "../../styles/FriendRequestModal.css";
 
 const FriendRequestModal = ({ onClose }) => {
   const [nickname, setNickname] = useState("");
@@ -15,7 +16,7 @@ const FriendRequestModal = ({ onClose }) => {
 
   return (
     <div className="friend-modal-overlay" onClick={onClose}>
-      <div className="friend-modal">
+      <div className="friend-modal" onClick={(e) => e.stopPropagation()}>
         <h2>친구 추가</h2>
         <form onSubmit={handleSubmit}>
           <input
