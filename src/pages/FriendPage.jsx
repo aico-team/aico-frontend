@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useFriendStore from "../../stores/friendStore";
-import FriendRequestForm from "../components/friends/FriendRequestForm";
-import ReceivedRequestsList from "../components/friends/ReceivedRequestsList";
 import FriendsList from "../components/friends/FriendsList";
+import FriendRequestModal from "../components/friends/FriendRequestModal";
 
 const FriendPage = () => {
   const { fetchFriends, fetchRequests } = useFriendStore();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     console.log("📥 fetchFriends(), fetchRequests() 호출됨");
@@ -16,14 +16,12 @@ const FriendPage = () => {
   return (
     <div>
       <h1>👥 친구 관리</h1>
-      <section>
-        <FriendRequestForm />
-      </section>
+      <div>
+        <h2>내 친구</h2>
+        <button onClick={() => setShowModal(true)}>+ 친구 요청</button>
+      </div>
 
-      <section>
-        <ReceivedRequestsList />
-      </section>
-
+      {showModal && <FriendRequestModal onClose={() => setShowModal(false)} />}
       <section>
         <FriendsList />
       </section>

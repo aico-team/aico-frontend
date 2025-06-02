@@ -1,0 +1,12 @@
+.friend-request-dropdown {
+  position: fixed;
+  top: 60px; /* 헤더 아래 살짝 띄우기 */
+  right: 20px;
+  width: 280px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 9999; /* 다른 요소 위에 표시 */
+}

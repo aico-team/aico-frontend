@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/AuthHeader.css";
 import useAuthStore from "../../../stores/authStore";
+import FriendAlertIcon from "../friends/FriendAlertIcon";
 
 const AuthHeader = () => {
   const user = useAuthStore((state) => state.user);
@@ -27,6 +28,7 @@ const AuthHeader = () => {
       <div className="auth-header-center"></div>
 
       <div className="auth-header-right">
+        <FriendAlertIcon />
         <img
           src="https://via.placeholder.com/30"
           alt="프로필"
