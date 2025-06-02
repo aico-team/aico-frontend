@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CurriculumList from "../pages/CurriculumList";
-
+import useAuthStore from "../../stores/authStore";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
@@ -18,6 +18,15 @@ import FriendPage from "../pages/FriendPage";
 export default function AppRoutes() {
   const [curriculum, setCurriculum] = useState(null);
   const [topic, setTopic] = useState("");
+
+  const setUser = useAuthStore((state) => state.setUser);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (stored) {
+      setUser(JSON.parse(stored));
+    }
+  }, [setUser]);
 
   return (
     <Router>

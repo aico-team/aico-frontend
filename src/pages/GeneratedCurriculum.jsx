@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../lib/apiClient";
 import { useNavigate } from "react-router-dom";
 import useCurriculumStore from "../../stores/curriculumStore";
+import "../styles/GeneratedCurriculum.css";
 
 const GeneratedCurriculum = ({ curriculum, topic }) => {
   // if (!curriculum) {
@@ -65,20 +66,26 @@ const GeneratedCurriculum = ({ curriculum, topic }) => {
   };
 
   return (
-    <div>
-      <h1>이 커리큘럼 어때요?☺️</h1>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        readOnly={!isEditable}
-        rows={10}
-        style={{ width: "80%", marginTop: "20px" }}
-      />
-      <div>
-        <button onClick={handleEdit}>수정</button>
-        <button onClick={handleConfirm}>확인</button>
+    <div className="curriculum-result-container">
+      <h1 className="curriculum-title">이 커리큘럼 어때요?☺️</h1>
+      <div className="curriculum-box">
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          readOnly={!isEditable}
+          rows={10}
+          style={{ width: "80%", marginTop: "20px" }}
+        />
+        <div className="curriculum-btn-group">
+          <button className="curriculum-btn edit" onClick={handleEdit}>
+            수정
+          </button>
+          <button className="curriculum-btn confirm" onClick={handleConfirm}>
+            확인
+          </button>
+        </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
