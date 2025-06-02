@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import apiClient from "../lib/apiClient";
-import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 import useAuthStore from "../../stores/authStore";
 
@@ -13,8 +12,6 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const { setUser } = useAuthStore();
-
-  const navigate = useNavigate();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -33,10 +30,15 @@ const Login = () => {
         password: input.password,
       });
 
+      console.log("🔥 로그인 응답:", response.data);
+
       //accessToken 저장
-      const rawHeader = response.headers["authorization"];
-      const accessToken = rawHeader?.split(" ")[1];
+      const accessToken = response.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
+      console.log(
+        "✅ 저장된 accessToken:",
+        localStorage.getItem("accessToken")
+      );
 
       //사용자 정보 저장
       const userData = {
@@ -48,8 +50,7 @@ const Login = () => {
 
       console.log("로그인에 성공했습니다.", response.data);
 
-      //로그인 성공 후 사용자를 대시보드 등 보호된 페이지로 이동
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (err) {
       setError("로그인에 실패했습니다.");
       console.error(err);
