@@ -1,0 +1,82 @@
+/* ===== 추천 커리큘럼 결과 페이지 ===== */
+
+/* 중앙 정렬 & 여백 */
+.curriculum-result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;        /* 필요 시 조정 */
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 제목 */
+.curriculum-title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* 커리큘럼 단계 리스트를 감싸는 카드 */
+.curriculum-box {
+  width: 80%;
+  max-width: 1000px;
+  background: #ffffff;
+  border: 1px solid #cfeee9;   /* 연한 민트 계열 보더 */
+  border-radius: 24px;
+  padding: 30px 40px;
+  box-sizing: border-box;
+}
+
+/* 단계 리스트(ul) 자체는 마진·패딩 제거 */
+.curriculum-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 각 단계(li) 스타일 */
+.curriculum-step {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+}
+
+/* 버튼 영역 */
+.curriculum-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 공통 버튼 */
+.curriculum-btn {
+  min-width: 80px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+/* ‘수정’(Edit) – 연한 테두리만 */
+.curriculum-btn.edit {
+  background: transparent;
+  color: #66c7b6;
+  border: 2px solid #66c7b6;
+}
+.curriculum-btn.edit:hover {
+  background: #e1f4f1;
+}
+
+/* ‘확인’(Confirm) – 실색 배경 */
+.curriculum-btn.confirm {
+  background: #66c7b6;
+  color: #ffffff;
+}
+.curriculum-btn.confirm:hover {
+  background: #57b6a6;
+}
