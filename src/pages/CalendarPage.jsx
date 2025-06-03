@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { format } from "date-fns";
+import { format, parseISO, isSameDay } from "date-fns";
 import { FiTrash2 } from "react-icons/fi";
 import GoalModal from "../components/GoalModal";
 import useGoalStore from "../../stores/goalStore";
@@ -48,7 +48,13 @@ const CalendarPage = () => {
 
   const selectedDayStr = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
   const todayGoals = Array.isArray(goals)
-    ? goals.filter((goal) => goal.deadLine === selectedDayStr)
+    ? goals.filter((goal) => {
+        try {
+          return isSameDay(parseISO(goal.deadLine), selectedDate);
+        } catch {
+          return false;
+        }
+      })
     : [];
 
   return (
