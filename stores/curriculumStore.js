@@ -141,17 +141,19 @@ const useCurriculumStore = create((set, get) => ({
       let studyData = response.data;
 
       if (typeof studyData === "string") {
-        const isJsonArray = studyData.trim().startsWith("[") && studyData.trim().endsWith("]")
+        const isJsonArray =
+          studyData.trim().startsWith("[") && studyData.trim().endsWith("]");
         if (isJsonArray) {
-        try {
-          studyData = JSON.parse(studyData);
-        } catch (err) {
-          console.error("parsing fail", err);
-          studyData = [];
+          try {
+            studyData = JSON.parse(studyData);
+          } catch (err) {
+            console.error("parsing fail", err);
+            studyData = [];
+          }
+        } else {
+          studyData = [{ title: studyData, link: "#" }];
         }
-      } else {
-        studyData = [ {title:studyData, link:"#"}];
-      }}
+      }
 
       if (!Array.isArray(studyData)) {
         studyData = [];
