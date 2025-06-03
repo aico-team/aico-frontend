@@ -48,7 +48,7 @@ const useCurriculumStore = create((set, get) => ({
       set({ curriculums: response.data, isLoading: false });
 
       response.data.forEach((curri) => {
-        useCurriculumStore.get().fetchProgress(curri.id);
+        useCurriculumStore.getState().fetchProgress(curri.id);
       });
     } catch (err) {
       console.warn("API 연결 실패", err);
@@ -138,7 +138,24 @@ const useCurriculumStore = create((set, get) => ({
         stage: step,
       });
 
-      const studyData = response.data;
+      let studyData = response.data;
+
+      if (typeof studyData === "string") {
+        const isJsonArray = studyData.trim().startsWith("[") && studyData.trim().endsWith("]")
+        if (isJsonArray) {
+        try {
+          studyData = JSON.parse(studyData);
+        } catch (err) {
+          console.error("parsing fail", err);
+          studyData = [];
+        }
+      } else {
+        studyData = [ {title:studyData, link:"#"}];
+      }}
+
+      if (!Array.isArray(studyData)) {
+        studyData = [];
+      }
 
       set((state) => ({
         recommendations: {
@@ -154,6 +171,7 @@ const useCurriculumStore = create((set, get) => ({
       set((state) => {
         const newSet = new Set(state.loadingSteps);
         newSet.delete(key);
+        console.log("💾 저장 전 recommendations[key]:", key);
         return { loadingSteps: newSet };
       });
     }

@@ -120,7 +120,7 @@ const CurriculumList = () => {
                             <div className="recommendation-list">
                               {isLoading ? (
                                 <p>자료 불러오는 중...</p>
-                              ) : (
+                              ) : Array.isArray(recs) ? (
                                 recs.map((item, idx) => (
                                   <div
                                     key={idx}
@@ -132,10 +132,11 @@ const CurriculumList = () => {
                                       rel="noopener noreferrer"
                                     >
                                       {item.title}
+                                
                                     </a>
                                   </div>
                                 ))
-                              )}
+                              ):( <p>자료가 존재하지 않습니다.</p>)}
                             </div>
                           )}
                         </div>
