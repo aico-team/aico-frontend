@@ -89,6 +89,13 @@ const useCurriculumStore = create((set, get) => ({
 
       const progress = response.data;
       console.log(`[진척도] ${id} 커리큘럼의 현재 진척도: ${progress}%`);
+
+      set((state) => ({
+        progressMap: {
+          ...state.progressMap,
+          [id]: progress,
+        },
+      }));
     } catch (err) {
       console.warn("진척도 요청 무시됨" + err);
     }
