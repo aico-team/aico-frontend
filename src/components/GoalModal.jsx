@@ -96,7 +96,7 @@ const GoalModal = ({
           <option value="">(자유 목표)</option>
           {curriculums.map((curri) => (
             <option key={curri.id} value={curri.id}>
-              {curri.title}
+              {curri.topic}
             </option>
           ))}
         </select>

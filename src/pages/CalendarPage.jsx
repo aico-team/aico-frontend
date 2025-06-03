@@ -8,6 +8,7 @@ import useGoalStore from "../../stores/goalStore";
 import "../styles/CalendarPage.css";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import useCurriculumStore from "../../stores/curriculumStore";
 
 const CalendarPage = () => {
   const [value, setValue] = useState(new Date());
@@ -18,6 +19,7 @@ const CalendarPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [initialGoal, setInitialGoal] = useState(null);
   const [searchParams] = useSearchParams();
+  const { fetchCurriculumList } = useCurriculumStore();
 
   const navigate = useNavigate();
 
@@ -33,14 +35,15 @@ const CalendarPage = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    const loadGoals = async () => {
+    const loadGoalsAndCurriculums = async () => {
       try {
         await fetchGoals();
+        await fetchCurriculumList();
       } catch (err) {
         console.warn("목표 불러오기 실패", err);
       }
     };
-    loadGoals();
+    loadGoalsAndCurriculums();
   }, []);
 
   const selectedDayStr = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
