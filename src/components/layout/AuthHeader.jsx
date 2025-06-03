@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/AuthHeader.css";
 import useAuthStore from "../../../stores/authStore";
+import userDefaultprofileImage from "../../assets/default-profile.png";
 
 const AuthHeader = () => {
   const user = useAuthStore((state) => state.user);
@@ -28,9 +29,9 @@ const AuthHeader = () => {
 
       <div className="auth-header-right">
         <img
-          src="https://via.placeholder.com/30"
+          src={userDefaultprofileImage}
           alt="프로필"
-          className="profile-img"
+          className="default-profile"
         />
         <span className="nickname">{user.nickname}</span>
       </div>
