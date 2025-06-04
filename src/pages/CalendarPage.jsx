@@ -19,7 +19,8 @@ const CalendarPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [initialGoal, setInitialGoal] = useState(null);
   const [searchParams] = useSearchParams();
-  const { fetchCurriculumList } = useCurriculumStore();
+  const { curriculums, fetchCurriculumList } = useCurriculumStore();
+  const [lastClickedDate, setLastClickedDate] = useState();
 
   const navigate = useNavigate();
 
@@ -50,7 +51,7 @@ const CalendarPage = () => {
   const todayGoals = Array.isArray(goals)
     ? goals.filter((goal) => {
         try {
-          return isSameDay(parseISO(goal.deadLine), selectedDate);
+          return isSameDay(parseISO(goal.deadline), selectedDate);
         } catch {
           return false;
         }
@@ -75,7 +76,7 @@ const CalendarPage = () => {
               tileContent={({ date }) => {
                 const dayStr = format(date, "yyyy-MM-dd");
                 const goalsForDay = goals.filter(
-                  (goal) => goal.deadLine === dayStr
+                  (goal) => goal.deadline === dayStr
                 );
                 const hasIncomplete = goalsForDay.some(
                   (goal) => !goal.completed
@@ -94,10 +95,16 @@ const CalendarPage = () => {
                 );
               }}
               onClickDay={(date) => {
+
+                const isSame = selectedDate && isSameDay(selectedDate, date);
                 setSelectedDate(date);
+
+                if (isSame && isSameDay(lastClickedDate, date) ) {
                 setIsEdit(false);
                 setInitialGoal(null);
-                setIsOpen(true);
+                setIsOpen(true);}
+
+                setLastClickedDate(date);
               }}
             />
           </div>
@@ -127,16 +134,21 @@ const CalendarPage = () => {
                   </button>
                   <p>
                     커리큘럼:{" "}
-                    {goal.curriculumId ? (
+                    {goal.currId ? (
+                      (() => {
+                        const matchedCurri = curriculums.find( c=> c.id === goal.currId);
+                        return matchedCurri ? (
                       <span
                         className="curriculum-link"
                         onClick={() => navigate("/CurriculumList")}
                       >
-                        {`커리큘럼 ${goal.curriculumId}`}
+                        {matchedCurri.topic}
                       </span>
                     ) : (
-                      "없음"
-                    )}
+                      "존재하지 않음"
+                    );
+                  })()
+                ) : ("없음")}
                   </p>
                   <p>상태: {goal.completed ? "✅ 완료" : "💦 진행 중"}</p>
                   <div className="todobtn-wrapper">
