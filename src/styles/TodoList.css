@@ -43,3 +43,24 @@
   color: #aaa;
   text-decoration: none;
 }
+
+.todo-completed-bttn {
+  margin-left: 8px;
+  background-color: #6ed3c7;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-delete-bttn {
+  top: 10px;
+  right: 10px;
+  color: gray;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
