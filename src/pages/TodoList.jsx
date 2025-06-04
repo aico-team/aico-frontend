@@ -7,7 +7,7 @@ const groupByCurriculum = (goals) => {
   const grouped = {};
 
   for (const goal of goals) {
-    const key = goal.curriculumId ?? "none";
+    const key = goal.currId ?? "none";
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(goal);
   }
