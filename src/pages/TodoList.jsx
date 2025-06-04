@@ -55,9 +55,10 @@ const TodoList = () => {
                   key={goal.goalId}
                   className={goal.completed ? "completed-goal" : ""}
                 >
-                  <span>
+                  <span className="goal-name">
                     {goal.completed ? "✅" : "💦"} {goal.goalName}
                   </span>
+
                   <div className="todo-bttns">
                     <button
                       className="todo-completed-bttn"

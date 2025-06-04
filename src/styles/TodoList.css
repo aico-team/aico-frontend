@@ -34,8 +34,15 @@
 }
 
 .goal-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.95rem;
   color: #111;
+  background-color: white;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
   margin-bottom: 6px;
 }
 
@@ -44,8 +51,22 @@
   text-decoration: none;
 }
 
+.goal-name {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo-bttns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .todo-completed-bttn {
   margin-left: 8px;
+  gap: 1rem;
   background-color: #6ed3c7;
   color: white;
   border: none;
