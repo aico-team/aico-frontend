@@ -60,7 +60,7 @@
 
 .todo-bttns {
   display: flex;
-  gap: 9px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
