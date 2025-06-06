@@ -88,11 +88,7 @@ const GoalModal = ({
         />
 
         <label>커리큘럼 선택 (선택)</label>
-        <select
-          name="currId"
-          value={input.currId || ""}
-          onChange={onChange}
-        >
+        <select name="currId" value={input.currId || ""} onChange={onChange}>
           <option value="">(자유 목표)</option>
           {curriculums.map((curri) => (
             <option key={curri.id} value={curri.id}>
@@ -102,8 +98,10 @@ const GoalModal = ({
         </select>
 
         <div className="button-wrapper">
-          <button onClick={onClose}>취소</button>
-          <button onClick={handleSubmit}>
+          <button className="cancel-bttn" onClick={onClose}>
+            취소
+          </button>
+          <button className="edit-save-bttn" onClick={handleSubmit}>
             {isEdit ? "수정 완료" : "저장"}
           </button>
         </div>
