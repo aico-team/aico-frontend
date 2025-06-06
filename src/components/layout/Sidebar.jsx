@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "../../styles/Sidebar.css";
 //아이콘
 import { AiFillHome, AiFillSchedule } from "react-icons/ai";
-import { MdAccessTimeFilled, MdGroups, MdLogout } from "react-icons/md";
+import { MdAccessTimeFilled, MdLogout, MdQuiz } from "react-icons/md";
 import { FcSettings } from "react-icons/fc";
 import { RiAiGenerate } from "react-icons/ri";
 import { IoMdList, IoIosChatboxes } from "react-icons/io";
-import { FaListCheck, FaBarsProgress } from "react-icons/fa6";
-import { IoLogoWechat } from "react-icons/io5";
+import { FaListCheck } from "react-icons/fa6";
+import { BiSolidNotepad } from "react-icons/bi";
 
 const Sidebar = () => {
   return (
@@ -62,21 +62,15 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
-              <MdGroups />
-              그룹
+            <Link to="/QuizPage">
+              <MdQuiz />
+              퀴즈
             </Link>
           </li>
           <li>
-            <Link to="/">
-              <FaBarsProgress />
-              나의 진행도
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <IoLogoWechat />
-              채팅
+            <Link to="/ReviewNote">
+              <BiSolidNotepad />
+              오답노트
             </Link>
           </li>
         </ul>

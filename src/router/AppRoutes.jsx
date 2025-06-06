@@ -13,6 +13,8 @@ import QnaPage from "../pages/QnaPage";
 import CalendarPage from "../pages/CalendarPage";
 import TodoList from "../pages/TodoList";
 import StudyTimeStat from "../pages/StudyTimeStat";
+import QuizPage from "../pages/QuizPage";
+import ReviewNote from "../pages/ReviewNote";
 
 export default function AppRoutes() {
   const [curriculum, setCurriculum] = useState(null);
@@ -53,6 +55,8 @@ export default function AppRoutes() {
           <Route path="/Calendar" element={<CalendarPage />} />
           <Route path="/TodoList" element={<TodoList />} />
           <Route path="/StudyTimeStat" element={<StudyTimeStat />} />
+          <Route path="/QuizPage" element={<QuizPage />} />
+          <Route path="/ReviewNote" element={<ReviewNote />} />
         </Route>
       </Routes>
     </Router>
