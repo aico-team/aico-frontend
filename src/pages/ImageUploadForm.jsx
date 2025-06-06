@@ -5,7 +5,7 @@ import "../styles/ImageUploadForm.css";
 const ImageUploadForm = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(""); //이미지 프리뷰
-  const { uploadQuizImage, IsUploading } = useQuizStore();
+  const { uploadQuizImage, isUploading } = useQuizStore();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -61,8 +61,8 @@ const ImageUploadForm = () => {
 
       {imagePreview && (
         <div className="submit-section">
-          <button onClick={handleSubmit} disabled={IsUploading}>
-            {IsUploading ? "업로드 중..." : "퀴즈 생성하기"}
+          <button onClick={handleSubmit} disabled={isUploading}>
+            {isUploading ? "업로드 중..." : "퀴즈 생성하기"}
           </button>
         </div>
       )}
