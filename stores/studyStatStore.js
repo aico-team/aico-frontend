@@ -49,6 +49,8 @@ const useStudyStatStore = create((set) => ({
         params: { userId, start, end },
       });
 
+      console.log("데일리 응답", response.data);
+
       if (!Array.isArray(response.data) || response.data.length === 0) {
         throw new Error("Invalid dailyStats data");
       }
@@ -67,6 +69,8 @@ const useStudyStatStore = create((set) => ({
       const response = await apiClient.get(`/study-time/weekly`, {
         params: { userId, date },
       });
+
+      console.log("위클리 응답", response.data);
 
       if (!Array.isArray(response.data) || response.data.length === 0) {
         throw new Error("Invalid weeklyStats data");

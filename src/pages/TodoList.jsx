@@ -7,7 +7,7 @@ const groupByCurriculum = (goals) => {
   const grouped = {};
 
   for (const goal of goals) {
-    const key = goal.curriculumId ?? "none";
+    const key = goal.currId ?? "none";
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(goal);
   }
@@ -16,7 +16,7 @@ const groupByCurriculum = (goals) => {
 };
 
 const TodoList = () => {
-  const { goals, fetchGoals } = useGoalStore();
+  const { goals, fetchGoals, toggleCompleteGoal, deleteGoal } = useGoalStore();
   const { curriculums } = useCurriculumStore();
 
   useEffect(() => {
@@ -55,7 +55,32 @@ const TodoList = () => {
                   key={goal.goalId}
                   className={goal.completed ? "completed-goal" : ""}
                 >
-                  {goal.completed ? "✅" : "💦"} {goal.goalName}
+                  <span className="goal-name">
+                    {goal.completed ? "✅" : "💦"} {goal.goalName}
+                  </span>
+
+                  <div className="todo-bttns">
+                    <button
+                      className="todo-completed-bttn"
+                      onClick={() => {
+                        if (window.confirm("이 목표를 완료 처리할까요?")) {
+                          toggleCompleteGoal(goal.goalId);
+                        }
+                      }}
+                    >
+                      완료
+                    </button>
+                    <button
+                      className="todo-delete-bttn"
+                      onClick={() => {
+                        if (window.confirm("이 목표를 삭제할까요?")) {
+                          deleteGoal(goal.goalId);
+                        }
+                      }}
+                    >
+                      삭제
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

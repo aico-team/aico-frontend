@@ -17,22 +17,22 @@ const GoalModal = ({
 
   const [input, setInput] = useState({
     goalName: "",
-    deadLine: selectedDate || "",
-    curriculumId: null,
+    deadline: selectedDate || "",
+    currId: null,
   });
 
   useEffect(() => {
     if (isEdit && initialGoal) {
       setInput({
         goalName: initialGoal.goalName || "",
-        deadLine: initialGoal.deadLine || selectedDate || "",
-        curriculumId: initialGoal.curriculumId || "",
+        deadline: initialGoal.deadline || selectedDate || "",
+        currId: initialGoal.currId || "",
       });
     } else {
       setInput({
         goalName: "",
-        deadLine: selectedDate || "",
-        curriculumId: null,
+        deadline: selectedDate || "",
+        currId: null,
       });
     }
   }, [isEdit, initialGoal, selectedDate]);
@@ -41,24 +41,24 @@ const GoalModal = ({
     const { name, value } = e.target;
     setInput((prev) => ({
       ...prev,
-      [name]: name === "curriculumId" && value === "" ? null : value,
+      [name]: name === "currId" && value === "" ? null : value,
     }));
   };
 
   const handleSubmit = async () => {
-    if (!input.goalName || !input.deadLine) return;
+    if (!input.goalName || !input.deadline) return;
 
     if (isEdit && initialGoal) {
       await editGoal(initialGoal.goalId, {
         goalName: input.goalName,
-        deadLine: input.deadLine,
-        curriculumId: input.curriculumId,
+        deadline: input.deadline,
+        currId: input.currId,
       });
     } else {
       await addGoal({
         goalName: input.goalName,
-        deadLine: input.deadLine,
-        curriculumId: input.curriculumId,
+        deadline: input.deadline,
+        currId: input.currId,
       });
     }
     onClose();
@@ -81,29 +81,27 @@ const GoalModal = ({
         <label>데드 라인</label>
         <input
           type="date"
-          name="deadLine"
-          value={input.deadLine}
+          name="deadline"
+          value={input.deadline}
           onChange={onChange}
           required
         />
 
         <label>커리큘럼 선택 (선택)</label>
-        <select
-          name="curriculumId"
-          value={input.curriculumId || ""}
-          onChange={onChange}
-        >
+        <select name="currId" value={input.currId || ""} onChange={onChange}>
           <option value="">(자유 목표)</option>
           {curriculums.map((curri) => (
             <option key={curri.id} value={curri.id}>
-              {curri.title}
+              {curri.topic}
             </option>
           ))}
         </select>
 
         <div className="button-wrapper">
-          <button onClick={onClose}>취소</button>
-          <button onClick={handleSubmit}>
+          <button className="cancel-bttn" onClick={onClose}>
+            취소
+          </button>
+          <button className="edit-save-bttn" onClick={handleSubmit}>
             {isEdit ? "수정 완료" : "저장"}
           </button>
         </div>
