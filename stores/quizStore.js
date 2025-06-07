@@ -14,7 +14,29 @@ const useQuizStore = create((set) => ({
 
     try {
       const response = await apiClient.post("/quiz", formData);
-      set({ quizzes: response.data });
+      const data = response.data;
+
+      const parsedQuizzes = [];
+
+      for (const key in data) {
+        const match = key.match(/^quiz(\d+)$/);
+        if (match) {
+          const index = match[1]; //quiz 개수
+          const quiz = data[`quiz${index}`];
+          const answer = data[`ans${index}`];
+
+          if (quiz && answer) {
+            parsedQuizzes.push({
+              quiz,
+              answer,
+              imageUrl: data.imageUrl,
+              fileName: data.fileName,
+              originalFileName: data.originalFileName,
+            });
+          }
+        }
+      }
+      set({ quizzes: parsedQuizzes });
     } catch (err) {
       console.error("사진 업로드에 실패", err);
       set({ uploadError: err });
