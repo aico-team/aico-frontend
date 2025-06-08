@@ -30,6 +30,8 @@ const QuizPage = () => {
                   quiz={quizItem.quiz}
                   answer={quizItem.answer}
                   imageUrl={quizItem.imageUrl}
+                  fileName={quizItem.fileName}
+                  originalFileName={quizItem.originalFileName}
                 />
               </SwiperSlide>
             ))}

@@ -68,7 +68,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/ReviewNote">
+            <Link to="/WrongNotePage">
               <BiSolidNotepad />
               오답노트
             </Link>

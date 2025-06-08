@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useSwiper } from "swiper/react";
 import ImageModal from "../ImageModal";
+import useWrongNoteStore from "../../../stores/wrongNoteStore";
 import "../../styles/QuizCard.css";
 
-const QuizCard = ({ index, quiz, answer, imageUrl }) => {
+const QuizCard = ({
+  index,
+  quiz,
+  answer,
+  imageUrl,
+  fileName,
+  originalFileName,
+}) => {
   const [userInput, setUserInput] = useState("");
   const [showImage, setShowImage] = useState();
   const [showAnswer, setShowAnswer] = useState();
+  const { saveWrongQuiz } = useWrongNoteStore();
   const swiper = useSwiper();
 
   useEffect(() => {
@@ -38,9 +47,22 @@ const QuizCard = ({ index, quiz, answer, imageUrl }) => {
     bttnReset();
   };
 
-  const handleWrong = () => {
-    alert("📌 오답노트에 저장되었습니다!");
-    bttnReset();
+  const handleWrong = async () => {
+    const quizData = {
+      imageUrl,
+      fileName,
+      originalFileName,
+      quiz,
+      answer,
+    };
+
+    try {
+      await saveWrongQuiz(quizData);
+      alert("📌 오답노트에 저장되었습니다!");
+      bttnReset();
+    } catch (err) {
+      alert("오답 노트 저장 중 오류가 발생했습니다.", err);
+    }
   };
 
   const bttnReset = () => {
