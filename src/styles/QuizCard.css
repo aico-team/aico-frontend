@@ -1,0 +1,133 @@
+.quiz-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 1200px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.quiz-num {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #6ed3c7;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-question {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+}
+
+.input-ans {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.showBttn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.show-img-bttn {
+  padding: 0.7rem 1.4rem;
+  background-color: #6ed3c7;
+  border: none;
+  color: white;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 높게 설정 */
+}
+
+.image-modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  z-index: 10000; /* overlay 위로 */
+}
+
+.show-ans-bttn {
+  padding: 0.7rem 1.4rem;
+  background-color: #6ed3c7;
+  border: none;
+  color: white;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.show-ans-bttn:hover {
+  background-color: #5fc2b6;
+}
+
+.quiz-answer {
+  background-color: #f7fdfc;
+  border-left: 4px solid #6ed3c7;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+}
+
+.answer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.correct-bttn,
+.wrong-bttn {
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.correct-bttn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.correct-bttn:hover {
+  background-color: #43a047;
+}
+
+.wrong-bttn {
+  background-color: #e53935;
+  color: white;
+}
+
+.wrong-bttn:hover {
+  background-color: #d32f2f;
+}

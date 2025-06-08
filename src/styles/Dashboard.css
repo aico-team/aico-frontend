@@ -37,6 +37,7 @@
   height: auto;
   max-height: 100%;
 }
+
 .right-card {
   display: flex;
   align-items: flex-start;
@@ -51,32 +52,44 @@
   margin-bottom: 1rem;
 }
 
-.grid-section {
+.quiz-review-section {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.swiper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.swiper-slide {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1.5rem;
-  align-items: start;
+.quiz-and-curriculum-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 2rem;
+  gap: 2rem;
 }
 
-.full-card {
+.quiz-column {
+  flex: 2;
+  min-width: 0;
+}
+
+.curriculum-column {
+  flex: 1;
+  min-width: 280px;
+  max-width: 525px;
+  height: auto;
   background: #fff;
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  height: auto;
-}
-
-.message-card {
-  text-align: center;
-  color: #666;
-  font-size: 1rem;
-  padding: 0.75rem;
-  min-height: 50px;
-  height: auto;
 }
