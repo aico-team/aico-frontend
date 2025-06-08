@@ -15,11 +15,12 @@ import "swiper/css/pagination";
 const Dashboard = () => {
   const { user } = useAuthStore();
   const { streakCount, fetchStreakCount } = useStudyStatStore();
-  const { wrongQuizzes } = useWrongNoteStore();
+  const { wrongQuizzes, fetchWrongQuizzes } = useWrongNoteStore();
 
   useEffect(() => {
     if (user?.userId) {
       fetchStreakCount(user.userId);
+      fetchWrongQuizzes();
     }
   }, [user?.userId]);
 
