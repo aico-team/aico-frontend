@@ -18,21 +18,18 @@ const ChatBox = () => {
       return;
     }
 
+    //메시지 상태에 불러온 메시지 저장
+    setMessages((prev) => [...prev, { role: "user", text: input }]);
+    setInput(""); //입력창 초기화
+    setError(null);
     setLoading(true);
 
     try {
       const response = await apiClient.post("/chat", { message: input });
       console.log("서버 응답:", response.data);
 
-      //메시지 상태에 불러온 메시지 저장
-      setMessages((prev) => [
-        ...prev,
-        { role: "user", text: input },
-        { role: "bot", text: response.data },
-      ]);
-
-      setInput(""); //입력창 초기화
-      setError(null);
+      //응답 불러오기
+      setMessages((prev) => [...prev, { role: "bot", text: response.data }]);
     } catch (err) {
       setError("질문 불러오기 실패:" + err.message);
       console.log(err);

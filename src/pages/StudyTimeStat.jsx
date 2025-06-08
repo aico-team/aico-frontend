@@ -22,7 +22,8 @@ const StudyTimeStat = () => {
   const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) return
+    
 
     //오늘 날짜 및 기간 계산
     const today = new Date().toISOString().split("T")[0];
@@ -34,6 +35,9 @@ const StudyTimeStat = () => {
     fetchStreakCount(userId);
     fetchDailyStats(userId, startStr, today);
     fetchWeeklyStats(userId, today);
+
+    console.log("데일리 호출", userId, startStr, today);
+    console.log("위클리 호출", userId, today);
   }, [userId]);
 
   const handleDateSearch = () => {

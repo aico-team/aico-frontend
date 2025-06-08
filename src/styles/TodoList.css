@@ -34,12 +34,54 @@
 }
 
 .goal-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.95rem;
   color: #111;
+  background-color: white;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
   margin-bottom: 6px;
 }
 
 .goal-items li.completed-goal {
   color: #aaa;
   text-decoration: none;
+}
+
+.goal-name {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo-bttns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.todo-completed-bttn {
+  margin-left: 8px;
+  gap: 1rem;
+  background-color: #6ed3c7;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-delete-bttn {
+  top: 10px;
+  right: 10px;
+  color: gray;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
 }

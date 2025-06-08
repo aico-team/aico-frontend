@@ -19,6 +19,9 @@ const CalendarMiniCard = () => {
     fetchGoals();
   }, []);
 
+  useEffect(() => {
+  }, [goals]);
+
   return (
     <div className="calendar-scale">
       <Calendar
@@ -36,7 +39,7 @@ const CalendarMiniCard = () => {
         }
         tileContent={({ date }) => {
           const dayStr = format(date, "yyyy-MM-dd");
-          const goalsForDay = goals.filter((goal) => goal.deadLine === dayStr);
+          const goalsForDay = goals.filter((goal) => goal.deadline === dayStr);
           const hasIncomplete = goalsForDay.some((goal) => !goal.completed);
           const icon =
             goalsForDay.length > 0 ? (hasIncomplete ? "💦" : "✅") : null;
