@@ -100,7 +100,7 @@ const CurriculumList = () => {
                                 )
                               }
                             />
-                            <strong>Step {step}:</strong> {detail.description}
+                            <strong> Step {step}:</strong> {detail.description}
                             <button
                               className="toggle-recommend-btn"
                               onClick={(e) => {
@@ -110,7 +110,7 @@ const CurriculumList = () => {
                                 if (alreadyExpanded) {
                                   toggleExpandedStep(key);
                                 } else {
-                                  toggleExpandedStep()
+                                  toggleExpandedStep(key);
                                   fetchRecommendations(curri.id, step);
                                 }
                               }}
@@ -125,33 +125,53 @@ const CurriculumList = () => {
       <p>자료 불러오는 중...</p>
     ) : Array.isArray(recs) && recs.length > 0 ? (
       (() => {
-        const raw = recs[0].title;
-        const matches = raw.match(/\[[^\]]+\] - \S+/g) || [];
+        // 1. 모든 title 문자열 병합
+        const rawText = recs.map(item => item.title).join(" ");
 
-        return matches.slice(0, 3).map((line, idx) => {
-          const [titlePart, linkPart] = line.split(" - ");
-          return (
-            <div key={idx} className="recommendation-item">
-              <span>{idx + 1}. </span>
-              <span className="recommendation-title">{titlePart}</span>
-              <span> - </span>
+        // 2. 마크다운 [텍스트](링크) 추출
+        const markdownMatches = [...rawText.matchAll(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g)];
+
+        // 3. [텍스트] - 링크 형식도 추출
+        const legacyMatches = [...rawText.matchAll(/\[([^\]]+)\]\s*-\s*(https?:\/\/\S+)/g)];
+
+        // 4. 일반 텍스트 항목 추출 (링크가 없는 경우)
+        const others = recs
+          .map(item => item.title)
+          .filter(t => !t.match(/\[.*\]\((https?:\/\/)/) && !t.match(/\[.*\] - https?:\/\//));
+
+        // 5. 결과 합치기 (마크다운 + 구문 + 일반 텍스트)
+        const finalItems = [
+          ...markdownMatches.map(m => ({ title: m[1], url: m[2] })),
+          ...legacyMatches.map(m => ({ title: m[1], url: m[2] })),
+          ...others.map(t => ({ title: t }))
+        ].slice(0, 3); // 최대 3개까지만
+
+        // 6. 렌더링
+        return finalItems.map((item, idx) => (
+          <div key={idx} className="recommendation-item">
+            <span>{idx + 1}. </span>
+            {item.url ? (
               <a
-                href={linkPart}
+                href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="recommendation-link"
               >
-                {linkPart}
+                {item.title}
               </a>
-            </div>
-          );
-        });
+            ) : (
+              <span className="recommendation-title-link">{item.title}</span>
+            )}
+          </div>
+        ));
       })()
     ) : (
       <p>자료가 존재하지 않습니다.</p>
     )}
   </div>
 )}
+
+
 
                         </div>
                       );
