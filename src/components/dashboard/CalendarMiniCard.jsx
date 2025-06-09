@@ -19,8 +19,7 @@ const CalendarMiniCard = () => {
     fetchGoals();
   }, []);
 
-  useEffect(() => {
-  }, [goals]);
+  useEffect(() => {}, [goals]);
 
   return (
     <div className="calendar-scale">

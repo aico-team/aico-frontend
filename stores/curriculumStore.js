@@ -4,22 +4,19 @@ import apiClient from "../src/lib/apiClient";
 const useCurriculumStore = create((set, get) => ({
   curriculums: [],
   isLoading: true,
-  progressMap: {}, //진척도
+  progressMap: {},
   //추천 자료 관련 상태
   recommendations: {}, //단계별 추천 자료
   expandedSteps: new Set(), //현재 열려 있는 단계
   loadingSteps: new Set(), //로딩 중인 단계 추적
 
-  //새 커리큘럼을 기존 목록에 추가
   addCurriculum: (newCurri) =>
     set((state) => ({
       curriculums: [...state.curriculums, newCurri],
     })),
 
-  //여러 커리큘럼을 받아올때
   setCurriculums: (curriList) => set({ curriculums: curriList }),
 
-  //커리큘럼 삭제
   deleteCurriculum: async (id) => {
     try {
       await apiClient.delete(`/curri/${id}`);
@@ -38,7 +35,6 @@ const useCurriculumStore = create((set, get) => ({
   //모든 커리큘럼 삭제 - 예비용
   resetCurriculums: () => set({ curriculums: [] }),
 
-  //커리큘럼 목록 불러오기
   fetchCurriculumList: async () => {
     set({ isLoading: true });
 

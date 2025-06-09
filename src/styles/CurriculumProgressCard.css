@@ -1,9 +1,8 @@
 .curriculum-progress-wrapper {
-  max-height: 400px; /* 원하는 만큼 줄이기 */
+  max-height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 4px; /* 스크롤바 공간 확보 */
-  scroll-behavior: smooth;
+  padding-right: 5px;
   scrollbar-width: thin;
   scrollbar-color: #6edac9 #f0f0f0;
 }
