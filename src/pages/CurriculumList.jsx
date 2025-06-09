@@ -105,9 +105,12 @@ const CurriculumList = () => {
                               className="toggle-recommend-btn"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                if (expandedSteps.has(key)) {
+                                const alreadyExpanded = expandedSteps.has(key);
+
+                                if (alreadyExpanded) {
                                   toggleExpandedStep(key);
                                 } else {
+                                  toggleExpandedStep(key);
                                   fetchRecommendations(curri.id, step);
                                 }
                               }}
