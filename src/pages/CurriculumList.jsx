@@ -136,7 +136,7 @@ const CurriculumList = () => {
                                       rel="noopener noreferrer"
                                       className="recommendation-link"
                                     >
-                                      🔗 {item.title}
+                                    {item.title}
                                     </a>
                                   </div>
                                 ))
