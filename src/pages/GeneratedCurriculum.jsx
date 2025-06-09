@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../lib/apiClient";
 import { useNavigate } from "react-router-dom";
 import useCurriculumStore from "../../stores/curriculumStore";
+import StepCard from "../components/StepCard";
 import "../styles/GeneratedCurriculum.css";
 
 const GeneratedCurriculum = ({ curriculum, topic }) => {
@@ -61,21 +62,40 @@ const GeneratedCurriculum = ({ curriculum, topic }) => {
     }
   };
 
+  const parsedSteps = content
+    .split("\n")
+    .map((line) => {
+      const [step, body] = line.split(":");
+      return { step: step?.trim(), content: body?.trim() };
+    })
+    .filter((s) => s.step && s.content);
+
   return (
     <div className="curriculum-result-container">
       <h1 className="curriculum-title">이 커리큘럼 어때요?☺️</h1>
       <div className="curriculum-box">
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          readOnly={!isEditable}
-          rows={10}
-          style={{ width: "80%", marginTop: "20px" }}
-        />
+        {!isEditable ? (
+          <div className="step-list-box">
+            {parsedSteps.map(({ step, content }, index) => (
+              <StepCard key={index} step={step} content={content} />
+            ))}
+          </div>
+        ) : (
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            readOnly={!isEditable}
+            rows={10}
+            style={{ width: "80%", marginTop: "20px" }}
+          />
+        )}
+
         <div className="curriculum-btn-group">
-          <button className="curriculum-btn edit" onClick={handleEdit}>
-            수정
-          </button>
+          {!isEditable && (
+            <button className="curriculum-btn edit" onClick={handleEdit}>
+              수정
+            </button>
+          )}
           <button className="curriculum-btn confirm" onClick={handleConfirm}>
             확인
           </button>
