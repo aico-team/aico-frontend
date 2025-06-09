@@ -123,8 +123,9 @@ const CurriculumList = () => {
                             <div className="recommendation-list">
                               {isLoading ? (
                                 <p>자료 불러오는 중...</p>
-                              ) : Array.isArray(recs) ? (
-                                recs.map((item, idx) => (
+                              ) : Array.isArray(recs) &&
+                                recs.slice(0, 3).length > 0 ? (
+                                recs.slice(0, 3).map((item, idx) => (
                                   <div
                                     key={idx}
                                     className="recommendation-item"
@@ -133,13 +134,15 @@ const CurriculumList = () => {
                                       href={item.link}
                                       target="_blank"
                                       rel="noopener noreferrer"
+                                      className="recommendation-link"
                                     >
-                                      {item.title}
-                                
+                                      🔗 {item.title}
                                     </a>
                                   </div>
                                 ))
-                              ):( <p>자료가 존재하지 않습니다.</p>)}
+                              ) : (
+                                <p>자료가 존재하지 않습니다.</p>
+                              )}
                             </div>
                           )}
                         </div>
