@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../lib/apiClient";
-import "../styles/TopicInput.css"; 
+import "../styles/TopicInput.css";
 
 const TopicInput = ({ setCurriculum, setTopic }) => {
   const [input, setInput] = useState({
@@ -66,7 +66,7 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
             placeholder="토픽을 입력해주세요"
             required
           />
-          <div className="info-icon">↑</div>
+          {/*<div className="info-icon">↑</div>*/}
         </div>
 
         <input
@@ -81,7 +81,9 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
           required
           className="stage-input"
         />
-        <button type="submit" className="submit-btn">확인</button>
+        <button type="submit" className="submit-btn">
+          확인
+        </button>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <h6 className="guide-text">
           원하는 분야, 기술 등을 키워드로 입력하면 AI가 입력 정보를 기반으로
