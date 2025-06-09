@@ -110,7 +110,7 @@ const CurriculumList = () => {
                                 if (alreadyExpanded) {
                                   toggleExpandedStep(key);
                                 } else {
-                                  toggleExpandedStep(key);
+                                  toggleExpandedStep()
                                   fetchRecommendations(curri.id, step);
                                 }
                               }}
@@ -120,31 +120,39 @@ const CurriculumList = () => {
                           </div>
 
                           {isExpanded && (
-                            <div className="recommendation-list">
-                              {isLoading ? (
-                                <p>자료 불러오는 중...</p>
-                              ) : Array.isArray(recs) &&
-                                recs.slice(0, 3).length > 0 ? (
-                                recs.slice(0, 3).map((item, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="recommendation-item"
-                                  >
-                                    <a
-                                      href={item.link}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="recommendation-link"
-                                    >
-                                    {item.title}
-                                    </a>
-                                  </div>
-                                ))
-                              ) : (
-                                <p>자료가 존재하지 않습니다.</p>
-                              )}
-                            </div>
-                          )}
+  <div className="recommendation-list">
+    {isLoading ? (
+      <p>자료 불러오는 중...</p>
+    ) : Array.isArray(recs) && recs.length > 0 ? (
+      (() => {
+        const raw = recs[0].title;
+        const matches = raw.match(/\[[^\]]+\] - \S+/g) || [];
+
+        return matches.slice(0, 3).map((line, idx) => {
+          const [titlePart, linkPart] = line.split(" - ");
+          return (
+            <div key={idx} className="recommendation-item">
+              <span>{idx + 1}. </span>
+              <span className="recommendation-title">{titlePart}</span>
+              <span> - </span>
+              <a
+                href={linkPart}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="recommendation-link"
+              >
+                {linkPart}
+              </a>
+            </div>
+          );
+        });
+      })()
+    ) : (
+      <p>자료가 존재하지 않습니다.</p>
+    )}
+  </div>
+)}
+
                         </div>
                       );
                     })}
