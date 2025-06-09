@@ -130,13 +130,17 @@ const CurriculumList = () => {
                                     key={idx}
                                     className="recommendation-item"
                                   >
+                                    <span>{idx + 1}. </span>
+                                    <span className="recommendation-title">
+                                      {item.title}
+                                    </span>
                                     <a
                                       href={item.link}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       className="recommendation-link"
                                     >
-                                      🔗 {item.title}
+                                      {item.link}
                                     </a>
                                   </div>
                                 ))
