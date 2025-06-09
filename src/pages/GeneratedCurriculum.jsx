@@ -5,10 +5,6 @@ import useCurriculumStore from "../../stores/curriculumStore";
 import "../styles/GeneratedCurriculum.css";
 
 const GeneratedCurriculum = ({ curriculum, topic }) => {
-  // if (!curriculum) {
-  //   return <p>커리큘럼 데이터가 없습니다. 다시 시도해주세요.</p>;
-  // }
-
   const [originalContent, setOriginalContent] = useState(""); //받아온 원본 curriculum
   const [content, setContent] = useState(""); //사용자가 수정할 수 있는 텍스트
   const [isEditable, setIsEditable] = useState(false);

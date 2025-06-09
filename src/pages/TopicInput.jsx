@@ -10,6 +10,7 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
   });
 
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,6 +35,8 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const response = await apiClient.get(
         `/curri?topic=${encodeURIComponent(input.topic)}&stage=${input.stage}`
@@ -49,6 +52,8 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
     } catch (err) {
       setError("커리큘럼 생성에 실패했습니다.");
       console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -81,10 +86,17 @@ const TopicInput = ({ setCurriculum, setTopic }) => {
           required
           className="stage-input"
         />
-        <button type="submit" className="submit-btn">
-          확인
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        {isSubmitting ? (
+          <p className="loading-text">불러오는 중입니다...</p>
+        ) : (
+          <>
+            <button type="submit" className="submit-btn">
+              확인
+            </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </>
+        )}
         <h6 className="guide-text">
           원하는 분야, 기술 등을 키워드로 입력하면 AI가 입력 정보를 기반으로
           커리큘럼을 추천해 드려요.
