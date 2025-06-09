@@ -90,7 +90,8 @@
 }
 
 .step-card {
-  background-color: #f9f9f9;
+  width: 57rem;
+  background-color: #d6f3f0;
   border-radius: 12px;
   padding: 16px;
   border: 1px solid #ccc;
