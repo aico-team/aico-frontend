@@ -10,7 +10,6 @@ const useGoalStore = create((set) => ({
   addGoal: async (newGoal) => {
     try {
       const response = await apiClient.post("/goals", newGoal);
-      console.log("🎯 목표 생성 응답:", response.data);
       set((state) => ({
         goals: [...state.goals, response.data],
       }));

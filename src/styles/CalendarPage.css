@@ -13,8 +13,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.react-calendar {
-  width: 100%;
+.calendar-wrapper .react-calendar {
+  width: 500px;
   font-size: 1.2rem;
   border: none;
   border-radius: 16px;

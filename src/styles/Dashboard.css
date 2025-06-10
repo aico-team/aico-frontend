@@ -1,14 +1,16 @@
-.dashboard-container {
-  padding: 1.25rem 2rem;
-  font-family: inherit;
-  overflow: hidden;
+.greeting-section {
+  padding-left: 2rem;
 }
 
-.greeting-and-cards {
+.greeting-section h2 {
+  margin-top: 1rem;
+}
+
+.dashboard-layout {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
 }
 
 .greeting-left {
@@ -33,23 +35,46 @@
   color: #666;
 }
 
-.left-card {
-  height: auto;
-  max-height: 100%;
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.right-card {
+.top-left {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  height: auto;
-  overflow: visible;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  gap: 3.8rem;
+}
+
+.bottom-left .quiz-card-box {
+  width: 996px;
+  height: 275px;
+}
+
+.timer-box {
+  width: 386px;
+  height: 299px;
+}
+
+.dashboard-curriculum-box {
+  width: 546px;
+  height: 299px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  overflow: auto;
+}
+
+.dashboard-calendar-box {
+  width: 539px;
+  height: 626px;
+}
+
+.quiz-card-box {
+  width: 996px;
+  height: 275px;
+  margin: 1.4rem auto;
 }
 
 .quiz-review-section {
@@ -68,28 +93,4 @@
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
-}
-
-.quiz-and-curriculum-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 2rem;
-  gap: 2rem;
-}
-
-.quiz-column {
-  flex: 2;
-  min-width: 0;
-}
-
-.curriculum-column {
-  flex: 1;
-  min-width: 280px;
-  max-width: 525px;
-  height: auto;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
