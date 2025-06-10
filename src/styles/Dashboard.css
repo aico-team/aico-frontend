@@ -1,14 +1,16 @@
-.dashboard-container {
-  padding: 1.25rem 2rem;
-  font-family: inherit;
-  overflow: hidden;
+.greeting-section {
+  padding-left: 2rem;
 }
 
-.greeting-and-cards {
+.greeting-section h2 {
+  margin-top: 1rem;
+}
+
+.dashboard-layout {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
 }
 
 .greeting-left {
@@ -33,50 +35,62 @@
   color: #666;
 }
 
-.left-card {
-  height: auto;
-  max-height: 100%;
-}
-.right-card {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  height: auto;
-  overflow: visible;
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-.grid-section {
+.left-column {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1.5rem;
-  align-items: start;
+.top-left {
+  display: flex;
+  gap: 3.8rem;
 }
 
-.full-card {
-  background: #fff;
-  padding: 1rem;
+.bottom-left .quiz-card-box {
+  width: 996px;
+  height: 275px;
+}
+
+.timer-box {
+  width: 386px;
+  height: 299px;
+}
+
+.dashboard-curriculum-box {
+  width: 546px;
+  height: 299px;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  height: auto;
+  padding: 1rem;
+  overflow: auto;
 }
 
-.message-card {
-  text-align: center;
-  color: #666;
-  font-size: 1rem;
-  padding: 0.75rem;
-  min-height: 50px;
-  height: auto;
+.dashboard-calendar-box {
+  width: 539px;
+  height: 626px;
+}
+
+.quiz-card-box {
+  width: 996px;
+  height: 275px;
+  margin: 1.4rem auto;
+}
+
+.quiz-review-section {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.swiper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }

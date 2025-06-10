@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <header className="layout-header">
-      <div className="logo">Aico</div>
+      <div className="landing-logo">Aico</div>
       <div className="auth-buttons">
         <button onClick={() => navigate("/login")}>로그인</button>
         <button onClick={() => navigate("/register")}>회원가입</button>
